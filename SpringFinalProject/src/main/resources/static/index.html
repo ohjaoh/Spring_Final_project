@@ -1,7 +1,46 @@
-<html>
-	<meta charset = "UTF-8">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>정적 페이지</title>
+</head>
 <body>
-	<h2>정적/index.html</h2>
-</body>
+    <h2>정적/index.html</h2>
 
+    <form id="userForm">
+        <label>Username: <input type="text" id="username" required></label><br>
+        <label>Password: <input type="password" id="password" required></label><br>
+        <label>Email: <input type="email" id="email"></label><br>
+        <label>Age: <input type="number" id="age"></label><br>
+        <label>Temp: <input type="text" id="temp"></label><br>
+        <button type="button" onclick="submitForm()">Create User</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            // 입력된 값을 가져오기
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+            const age = document.getElementById("age").value;
+            const temp = document.getElementById("temp").value;
+
+            // 서버로 데이터 전송
+            fetch("/api/users/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: `username=${username}&password=${password}&email=${email}&age=${age}&temp=${temp}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("User created: " + JSON.stringify(data));
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    </script>
+</body>
 </html>
