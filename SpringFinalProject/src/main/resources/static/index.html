@@ -4,43 +4,111 @@
     <meta charset="UTF-8">
     <title>정적 페이지</title>
 </head>
+<style>
+	.container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+  }
+  	.box {
+	text-align: center;
+  }
+  
+    .header {
+    display: flex;
+    margin-bottom: 0.5%;
+    margin-left: 20%;
+    justify-content: center;
+    align-items: center;
+    height: 26vh;
+    width: 60vw;
+    background-color: lightgray;
+  }
+  
+  .center {
+    display: flex;
+    margin-left: 20%;
+    height: 100vh;
+    width: 60vw;
+    background-color: sandybrown;
+    
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    height: 100vh;
+    width: 12vw;
+    background-color: yellow;
+  }
+  
+  .content {
+    display: flex;
+    margin-right: 0.5%;
+    height: 100vh;
+    width: 48vw;
+    background-color: aliceblue;
+  }
+  
+  .login {
+    display: flex;
+    margin-bottom: 3%;
+    height: 20vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center; 
+    background-color: deepskyblue;
+  }
+  
+  .boardList {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    background-color: skyblue;
+  }
+  
+    .footer {
+    display: flex;
+    margin-left: 20%;
+    position: sticky;
+    bottom: 0;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 8vh;
+    width: 60vw;
+    background-color: salmon;
+  }
+  
+</style>
 <body>
-    <h2>정적/index.html</h2>
-
-    <form id="userForm">
-        <label>Username: <input type="text" id="username" required></label><br>
-        <label>Password: <input type="password" id="password" required></label><br>
-        <label>Email: <input type="email" id="email"></label><br>
-        <label>Age: <input type="number" id="age"></label><br>
-        <label>Temp: <input type="text" id="temp"></label><br>
-        <button type="button" onclick="submitForm()">Create User</button>
-    </form>
-
-    <script>
-        function submitForm() {
-            // 입력된 값을 가져오기
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-            const email = document.getElementById("email").value;
-            const age = document.getElementById("age").value;
-            const temp = document.getElementById("temp").value;
-
-            // 서버로 데이터 전송
-            fetch("/api/users/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: `username=${username}&password=${password}&email=${email}&age=${age}&temp=${temp}`,
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("User created: " + JSON.stringify(data));
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-        }
-    </script>
+	<div class="container">
+	
+	<div class="header">헤더</div>
+	<div class="center">
+	<div class="sidebar">
+		<div class="login">
+			<form id="userForm">
+				<div>
+				<label>Email: <br><input type="email" id="email"></label><br>
+	        	<label>Password: <br><input type="password" id="password" required></label>
+	        	<button type="button" onclick="submitForm()">로그인</button> 
+	        	</div>
+	        	<div class="box">
+	        	<a href="registerPage">회원가입</a>
+	        	</div>
+	    	</form>
+		</div>
+		
+		<div class="boardList">게시판</div>
+		</div>
+		
+			<div class="content">내용</div>
+	</div>
+	
+	<div class="footer">푸터</div>
+	</div>
 </body>
 </html>

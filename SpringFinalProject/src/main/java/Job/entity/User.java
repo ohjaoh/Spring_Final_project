@@ -15,7 +15,7 @@ public class User {
 	private String password;
 	private String email;
 	private Integer age;
-	private String temp;
+	private String temp; 
 
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
