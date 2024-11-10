@@ -2,113 +2,84 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>정적 페이지</title>
+    <title>인력사무소</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .header, .center, .footer, .sidebar, .content, .login, .boardList {
+            border-radius: 2px;
+        }
+        .header {
+            background-color: lightgray;
+            height: 20vh;
+        }
+        .center {
+            background-color: sandybrown;
+            min-height: 80vh;
+        }
+        .sidebar {
+            background-color: yellow;
+        }
+        .content {
+            background-color: blue;
+            width: 100%;
+            margin-left: 0.7vw;
+        }
+        .login {
+            background-color: deepskyblue;
+            padding: 1rem;
+        }
+        .boardList {
+            background-color: skyblue;
+            display: flex;
+            min-height: 80vh;
+            align-items: center;
+            justify-content: center;
+        }
+         .footer {
+            background-color: salmon;
+            text-align: center;
+            padding: 1rem;
+            position: sticky;
+            bottom: 0;
+        }
+    </style>
 </head>
-<style>
-	.container {
-	height: 100%;
-	width: 100%;
-	position: relative;
-  }
-  	.box {
-	text-align: center;
-  }
-  
-    .header {
-    display: flex;
-    margin-bottom: 0.5%;
-    margin-left: 20%;
-    justify-content: center;
-    align-items: center;
-    height: 26vh;
-    width: 60vw;
-    background-color: lightgray;
-  }
-  
-  .center {
-    display: flex;
-    margin-left: 20%;
-    height: 100vh;
-    width: 60vw;
-    background-color: sandybrown;
-    
-  }
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    margin-left: 0.5%;
-    margin-right: 0.5%;
-    height: 100vh;
-    width: 12vw;
-    background-color: yellow;
-  }
-  
-  .content {
-    display: flex;
-    margin-right: 0.5%;
-    height: 100vh;
-    width: 48vw;
-    background-color: aliceblue;
-  }
-  
-  .login {
-    display: flex;
-    margin-bottom: 3%;
-    height: 20vh;
-    width: 100%;
-    justify-content: center;
-    align-items: center; 
-    background-color: deepskyblue;
-  }
-  
-  .boardList {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
-    background-color: skyblue;
-  }
-  
-    .footer {
-    display: flex;
-    margin-left: 20%;
-    position: sticky;
-    bottom: 0;
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
-    height: 8vh;
-    width: 60vw;
-    background-color: salmon;
-  }
-  
-</style>
 <body>
-	<div class="container">
-	
-	<div class="header">헤더</div>
-	<div class="center">
-	<div class="sidebar">
-		<div class="login">
-			<form id="userForm">
-				<div>
-				<label>Email: <br><input type="email" id="email"></label><br>
-	        	<label>Password: <br><input type="password" id="password" required></label>
-	        	<button type="button" onclick="submitForm()">로그인</button> 
-	        	</div>
-	        	<div class="box">
-	        	<a href="registerPage">회원가입</a>
-	        	</div>
-	    	</form>
-		</div>
-		
-		<div class="boardList">게시판</div>
-		</div>
-		
-			<div class="content">내용</div>
-	</div>
-	
-	<div class="footer">푸터</div>
-	</div>
+    <div class="container">
+        <div class="header text-center p-3 mb-2">
+            <h2>인력사무소</h2>
+        </div>
+        
+        <div class="center d-flex mx-auto">
+            <div class="sidebar col-md-3 p-3">
+                <div class="login text-center p-3 mb-3">
+                    <form id="userForm">
+                        <input type="email" class="form-control mb-2" id="email" placeholder="아이디" required>
+                        <input type="password" class="form-control mb-2" id="password" placeholder="비밀번호" required>
+                        <button type="button" class="btn btn-primary btn-block" onclick="submitForm()">로그인</button> 
+                        <div class="mt-2">
+                            <a href="registerPage">회원가입</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="boardList p-3">
+                    <h5>게시판 리스트</h5>
+                </div>
+            </div>
+            
+            <div class="content">
+                <h4>내용</h4>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>푸터</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
