@@ -13,27 +13,29 @@ import lombok.Data;
 @Table(name = "admin")
 @Data
 public class Admin {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long adminNo; // 관리자 번호 (기본 키, 자동 증가)
 
-    @NotBlank(message = "아이디가 비었습니다.")
-    @Size(min = 4, message = "아이디는 4자 이상이어야 합니다.")
-    private String adminId; // 관리자 아이디
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long adminNo; // 관리자 번호 (기본 키, 자동 증가)
 
-    @NotBlank(message = "비밀번호가 비었습니다.")
-    private String adminPassword; // 관리자 비밀번호
+	@NotBlank(message = "아이디가 비었습니다.")
+	@Size(min = 4, message = "아이디는 4자 이상이어야 합니다.")
+	private String adminId; // 관리자 아이디
 
-    @NotBlank(message = "이름이 비었습니다.")
-    @Size(min = 2, message = "이름은 2자 이상이어야 합니다.")
-    private String adminName; // 관리자 이름
+	@NotBlank(message = "비밀번호가 비었습니다.")
+	private String adminPassword; // 관리자 비밀번호
 
-    @NotBlank(message = "전화번호가 비었습니다.")
-    private String adminPhoneNumber; // 관리자 전화번호
-    
-    @NotBlank(message = "직책이 비었습니다.")
-    private String adminPosition;
+	private String adminSalt; // 비밀번호 해싱에 사용되는 Salt
+
+	@NotBlank(message = "이름이 비었습니다.")
+	@Size(min = 2, message = "이름은 2자 이상이어야 합니다.")
+	private String adminName; // 관리자 이름
+
+	@NotBlank(message = "전화번호가 비었습니다.")
+	private String adminPhoneNumber; // 관리자 전화번호
+
+	@NotBlank(message = "직책이 비었습니다.")
+	private String adminPosition;
 
 	public long getAdminNo() {
 		return adminNo;
@@ -57,6 +59,14 @@ public class Admin {
 
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
+	}
+
+	public String getAdminSalt() {
+		return adminSalt;
+	}
+
+	public void setAdminSalt(String adminSalt) {
+		this.adminSalt = adminSalt;
 	}
 
 	public String getAdminName() {
@@ -86,9 +96,8 @@ public class Admin {
 	@Override
 	public String toString() {
 		return "Admin [adminNo=" + adminNo + ", adminId=" + adminId + ", adminPassword=" + adminPassword
-				+ ", adminName=" + adminName + ", adminPhoneNumber=" + adminPhoneNumber + ", adminPosition="
-				+ adminPosition + "]";
+				+ ", adminSalt=" + adminSalt + ", adminName=" + adminName + ", adminPhoneNumber=" + adminPhoneNumber
+				+ ", adminPosition=" + adminPosition + "]";
 	}
 
-    
 }

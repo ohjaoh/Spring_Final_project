@@ -1,6 +1,3 @@
-지금은 임시로 로컬로 진행 추후 원격 서버 돌리면 그 때 
-application.properties 깃이그노어 진행 예정
-
 처음 진행시
 1. 해당 프로젝트를 clone
 2. spring boot를 실행
@@ -8,5 +5,5 @@ application.properties 깃이그노어 진행 예정
 4. 기본적인 방식으로 import가 안될 경우
 5. 하단의 Maven클릭
 6. Existing Maven Projects를 누른다.
-7. clone한 디랙토리로 이동 후 SpringFinalProject를 클릭 (pom.xml을 기준으로 프로젝트를 찾는 것임)
+7. clone한 디랙토리로 이동 후 SpringFinalProject를 클릭 (pom.xml을 기준으로 프로젝트를 찾는 것)
 8. 프로젝트가 성공적으로 불러와지면 Boot Dashboard를 실행하여 index.html이 나오는지 확인 후 작업 진행

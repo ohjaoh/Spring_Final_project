@@ -1,0 +1,45 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<title>인력사무소</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="header text-center p-3 mb-2">
+			<h2>관리자페이지</h2>
+		</div>
+
+		<div class="center d-flex mx-auto">
+			<div class="sidebar col-md-3 p-3">
+				<div class="login text-center p-3 mb-3">
+					<form id="userForm">
+						접속한 관리자 정보
+					</form>
+				</div>
+				<div class="menuList">
+					<h5>회원관리</h5>
+					<h5 onclick="toggleBoardList()" >게시판관리</h5>
+					<div id="boardTagListContent" class="hideBoardlistContent">
+						<h5 th:each="board : ${boardList}" th:text="${board}"></h5>
+					</div>
+				</div>
+			</div>
+
+			<div class="content">
+				<h4>내용</h4>
+			</div>
+		</div>
+
+		<div class="footer">
+			<p>푸터</p>
+		</div>
+	</div>
+
+	<script src="/js/admin.js"></script>
+</body>
+
+</html>
