@@ -1,5 +1,9 @@
 package Job.service;
 
-public interface AdminService {
+import Job.entity.Admin;
 
+public interface AdminService {
+	
+	public void registerAdmin(Admin admin);
+	public boolean AdminLogin(String inputAdminId, String inputPassword);
 }

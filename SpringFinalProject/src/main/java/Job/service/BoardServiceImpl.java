@@ -14,5 +14,7 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardTagRepository boardTagRepo;
 	
+	// 게시판 등수삭 하는 함수
+	// 게시판 목록 불러오는 함수
 	
 }
