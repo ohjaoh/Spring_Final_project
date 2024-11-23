@@ -15,7 +15,7 @@ public class User {
 	private String password;
 	private String email;
 	private Integer age;
-	private String temp; 
+	private String content; 
 
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
@@ -74,12 +74,12 @@ public class User {
 		this.age = age;
 	}
 
-	public String getTemp() {
-		return temp;
+	public String getcontent() {
+		return content;
 	}
 
-	public void setTemp(String temp) {
-		this.temp = temp;
+	public void setcontent(String content) {
+		this.content = content;
 	}
 
 	public LocalDateTime getCreatedAt() {
