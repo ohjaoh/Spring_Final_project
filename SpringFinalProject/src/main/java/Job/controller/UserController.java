@@ -16,23 +16,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    // 로그인 처리
-    @PostMapping("/login")
-    public String login(User user, HttpSession session) {
-        User findUser = userService.getUser(user);
-
-        if (findUser != null && 
-				findUser.getPassword().equals(user.getPassword())) {
-		        System.out.println("Password 통과");
-		        session.setAttribute("user", findUser);
-		        return "redirect:";
-	     } else {
-		        System.out.println("Password 불일치");
-		        return "redirect:index";
-		    }
-    }
-
+    
     // 로그아웃 처리
     @GetMapping("/logout")
     public String logout(Model model) {

@@ -24,22 +24,7 @@ public class AdminController {
 	@Autowired
 	private BoardCategoryService boardCategoryService;
 
-	// 일단 임시로 index의 login을 이용해서 연결함 다음 주에 관리자 로그인을 분리하거나 login컨트롤러를 만들고 합칠 에정
-	@PostMapping("/adminLogin")
-	public String adminLogin(@RequestParam("userId") String id, @RequestParam("userId") String password,
-			HttpSession session) {
-		Admin admin = new Admin();
-		admin.setAdminId(id);
-		admin.setAdminPassword(password);
-//		System.out.println("입력한 id와 비밀번호 " + admin.getAdminId() + "비밀번호 " + admin.getAdminPassword());
-		if (adminService.AdminLogin(admin.getAdminId(), admin.getAdminPassword())) {
-			// 로그인 성공 시 관리자의 이름을 보여준다.
-			session.setAttribute("AdminName", adminService.LoginAdminName(id));
-			// 지금은 임시로 바로 관리자로 진입하게 했지만 추후에는 index.html에 버튼형태로 진입하게 수정할 계획
-			return "redirect:admin";
-		}
-		return "/";
-	}
+	
 
 	// 관리자 페이지 진입
 	@GetMapping("/admin")

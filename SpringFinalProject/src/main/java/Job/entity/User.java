@@ -1,6 +1,9 @@
 package Job.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,13 +12,25 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long userNo;
 
-	private String username;
-	private String password;
-	private String email;
-	private Integer age;
-	private String content; 
+	@NotBlank(message = "아이디가 비었습니다.")
+	@Size(min = 4, message = "아이디는 4자 이상이어야 합니다.")
+	private String userId;
+
+	@NotBlank(message = "회원이름이 비었습니다.")
+	private String userName;
+
+	@NotBlank(message = "비밀번호가 비었습니다.")
+	private String userPassword;
+
+	private String userSalt; // 비밀번호 해싱에 사용되는 Salt
+
+	@NotBlank(message = "이메일가 비었습니다.")
+	private String userEmail;
+
+	@NotBlank(message = "나이가 비었습니다.")
+	private Integer userAge;
 
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
@@ -34,52 +49,60 @@ public class User {
 		updatedAt = LocalDateTime.now();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserNo() {
+		return userNo;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserNo(Long userNo) {
+		this.userNo = userNo;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
-	public Integer getAge() {
-		return age;
+	public String getUserSalt() {
+		return userSalt;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setUserSalt(String userSalt) {
+		this.userSalt = userSalt;
 	}
 
-	public String getcontent() {
-		return content;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setcontent(String content) {
-		this.content = content;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public Integer getUserAge() {
+		return userAge;
+	}
+
+	public void setUserAge(Integer userAge) {
+		this.userAge = userAge;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -96,6 +119,13 @@ public class User {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userNo=" + userNo + ", userId=" + userId + ", userName=" + userName + ", userPassword="
+				+ userPassword + ", userSalt=" + userSalt + ", userEmail=" + userEmail + ", userAge=" + userAge
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 }

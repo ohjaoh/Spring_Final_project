@@ -12,15 +12,19 @@ public class BoardCategoryTest {
 	@Autowired
 	private BoardCategoryService boardCategoryService;
 
-//	@Test
+	@Test
 	public void insrtBoardCategory() {
-		String categoryName = "자유";
-		boardCategoryService.insertBoardCategory(categoryName);
+		String categoryName1 = "구인";
+		String categoryName2 = "구직";
+		String categoryName3 = "자유";
+		boardCategoryService.insertBoardCategory(categoryName1);
+		boardCategoryService.insertBoardCategory(categoryName2);
+		boardCategoryService.insertBoardCategory(categoryName3);
 	}
 	
 //	@Test
 	public void updateBoardCategory() {
-		String updateCategoryName = "새로운변경사항";
+		String updateCategoryName = "업데이트할 카테고리이름";
 		boardCategoryService.updateBoardCategory(1, updateCategoryName);
 	}
 //	@Test
