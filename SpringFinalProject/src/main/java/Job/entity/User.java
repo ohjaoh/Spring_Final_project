@@ -29,7 +29,6 @@ public class User {
 	@NotBlank(message = "이메일가 비었습니다.")
 	private String userEmail;
 
-	@NotBlank(message = "나이가 비었습니다.")
 	private Integer userAge;
 
 	@Column(name = "created_at", updatable = false)

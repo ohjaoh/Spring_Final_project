@@ -40,8 +40,9 @@ public class LoginController {
 		} else if (userService.userLogin(id, password)) {
 			session.setAttribute("UserName", userService.LoginUserName(id));
 			System.out.println("일반 회원 로그인 성공");
+		
 		}
-		return "/";
+		return "redirect:/";
 	}
 
 }
