@@ -1,101 +1,191 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-	<meta charset="UTF-8">
-	<title>인력사무소</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<style>
-		.header,
-		.center,
-		.footer,
-		.sidebar,
-		.content,
-		.login,
-		.boardList {
-			border-radius: 2px;
-		}
+    <meta charset="UTF-8">
+    <title>인력사무소</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .header, .center, .footer, .sidebar, .content, .login, .boardList {
+            border-radius: 2px;
+        }
+        .header {
+            background-color: lightgray;
+            height: 20vh;
+        }
+        .center {
+            min-height: 80vh;
+        }
+        .sidebar {
+            border-top: 2px solid lightgray;
+            border-right: 2px solid lightgray;
+        }
+        .content {
+            border-top: 2px solid lightgray;
+            width: 100%;
+            margin-left: 0.7vw;
+        }
+        .login {
+            padding: 1rem;
+        }
+        .login-button {
+        }
+        .boardList {
+            border-top: 2px solid lightgray;
+            display: flex;
+            min-height: 80vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer {
+            border-top: 2px solid lightgray;
+            margin-top: 10px;
+            text-align: center;
+            padding: 1rem;
+            bottom: 0;
+        }
 
-		.header {
-			background-color: lightgray;
-			height: 20vh;
-		}
+        .toggleSwitch {
+            width: 100px;
+            height: 30px;
+            display: block;
+            position: relative;
+            border: 1px solid lightgray;
+            border-radius: 30px;
+            background-color: white;
+            cursor: pointer;
+        }
 
-		.center {
-			background-color: sandybrown;
-			min-height: 80vh;
-		}
+        .toggleSwitch .toggleButton {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 50%;
+            left: 4px;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            background: green;
+            transition: all 0.2s ease-in;
+        }
 
-		.sidebar {
-			background-color: yellow;
-		}
+        #toggle:checked ~ .toggleSwitch {
+            background: #fff;
+        }
 
-		.content {
-			background-color: blue;
-			width: 100%;
-			margin-left: 0.7vw;
-		}
+        #toggle:checked ~ .toggleSwitch .toggleButton {
+            left: calc(100% - 24px);
+            background: red;
+        }
 
-		.login {
-			background-color: deepskyblue;
-			padding: 1rem;
-		}
+        .toggleSwitch .label-left,
+        .toggleSwitch .label-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            font-weight: bold;
+        }
 
-		.boardList {
-			background-color: skyblue;
-			display: flex;
-			min-height: 80vh;
-			align-items: center;
-			justify-content: center;
-		}
+        .toggleSwitch .label-left {
+            left: 5px;
+            color: red;
+        }
 
-		.footer {
-			background-color: salmon;
+        .toggleSwitch .label-right {
+            right: 5px;
+            color: green;
+        }
+
+        .toggleSwitch .label-left.hidden,
+        .toggleSwitch .label-right.hidden {
+            display: none;
+        }
+
+        .toggleSwitch, .toggleButton {
+            transition: all 0.2s ease-in;
+        }
+
+        .switch-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .switch-container a {
+            margin-right: 10px; 
+        }
+        .register{
+			margin-bottom: 10px;
 			text-align: center;
-			padding: 1rem;
-			position: sticky;
-			bottom: 0;
 		}
-	</style>
+    </style>
 </head>
-
 <body>
-	<div class="container">
-		<div class="header text-center p-3 mb-2">
-			<h2>인력사무소</h2>
-			<button type="button" class="btn btn-primary" onclick="showAdminModal()">관리자</button>
-		</div>
+    <div class="container">
+        <div class="header text-center p-3 mb-2">
+            <h2>인력사무소</h2>
+        </div>
+        
+        <div class="center d-flex mx-auto">
+            <div class="sidebar col-md-3 p-3">
+                <div class="login text-center p-3 mb-3">
+                    <form id="userForm">
+                        <input name="email" type="text" class="form-control mb-1" placeholder="아이디" required>
+                        <input name="password" type="password" class="form-control mb-1" placeholder="비밀번호" required>
+                        <input type="submit" value="login" class="btn btn-primary btn-block">
+                        <div class="mt-1">
+                            <div class="switch-container">
+                                <a class="register" href="registerPage">회원가입</a>
+                                <input type="checkbox" id="toggle" hidden>
+                                <label for="toggle" class="toggleSwitch">
+                                    <span class="toggleButton"></span>
+                                    <span class="label-left" id="label-left">관리자</span>
+                                    <span class="label-right" id="label-right">회원</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="boardList p-3">
+                    <h5>게시판 리스트</h5>
+                </div>
+            </div>
+            
+            <div class="content">
+                <h4>내용</h4>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>푸터</p>
+        </div>
+    </div>
 
-		<div class="center d-flex mx-auto">
-			<div class="sidebar col-md-3 p-3">
-				<div class="login text-center p-3 mb-3">
-					<!-- 임시로 관리자 로그인을 위해 사용 병합 시 무시-->
-					<form id="userForm" action="adminLogin" method="post">
-						<input name="userId" type="text" required>
-						<input name="userPassword" type="password">
-						<button type="submit">로그인</button>
-					</form>
-				</div>
-				<div class="boardList p-3">
-					<h5>게시판 리스트</h5>
-				</div>
-			</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // 초기 상태에서 왼쪽 텍스트만 보이도록 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            const leftLabel = document.querySelector('.label-right');
+            const rightLabel = document.querySelector('.label-left');
+            leftLabel.classList.remove('hidden'); 
+            rightLabel.classList.add('hidden');   
+        });
 
-			<div class="content">
-				<h4>내용</h4>
-			</div>
-		</div>
+        // 토글 스위치 상태가 변경될 때마다 왼쪽/오른쪽 텍스트 숨기기
+        document.getElementById('toggle').addEventListener('change', function() {
+            const leftLabel = document.querySelector('.label-right');
+            const rightLabel = document.querySelector('.label-left');
 
-		<div class="footer">
-			<p>푸터</p>
-		</div>
-	</div>
-
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="/js/index.js"></script>
+            if (this.checked) {
+                leftLabel.classList.add('hidden'); 
+                rightLabel.classList.remove('hidden'); 
+            } else {
+                leftLabel.classList.remove('hidden'); 
+                rightLabel.classList.add('hidden'); 
+            }
+        });
+    </script>
 </body>
-
 </html>
+
