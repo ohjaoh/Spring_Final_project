@@ -1,0 +1,19 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<head th:fragment="fragment-AdminBoardCategoryManagement">
+	<title>Thymeleaf Fragment</title>
+</head>
+
+<div th:fragment="categoryTable">
+	<table>
+		<tr>
+			<th>카테고리번호</th>
+			<th>카테고리이름</th>
+			<th>관리 버튼</th>
+		</tr>
+		<tr th:each="board : ${boardCategoryList}" th:text="${board}"></tr>
+		<a>카태고리생성</a>
+	</table>
+</div>
+
+</html>

@@ -48,71 +48,9 @@ public class Board {
 	private String writerType; // 작성자 타입
 
     @ManyToOne // 다대일 관계 설정
-    @JoinColumn(name = "boardTagNo", nullable = false) // 외래 키 컬럼
-    private BoardTag boardTag; // 게시판 태그
+    @JoinColumn(name = "boardCategory", nullable = false) // 외래 키 컬럼
+    private BoardCategory category; // 게시판 태그
 
-	public Long getBoardNo() {
-		return boardNo;
-	}
 
-	public void setBoardNo(Long boardNo) {
-		this.boardNo = boardNo;
-	}
-
-	public String getBoardTitle() {
-		return boardTitle;
-	}
-
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
-	}
-
-	public String getBoardContent() {
-		return boardContent;
-	}
-
-	public void setBoardContent(String boardContent) {
-		this.boardContent = boardContent;
-	}
-
-	public Date getWriteDate() {
-		return writeDate;
-	}
-
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
-	}
-
-	public String getWriterName() {
-		return writerName;
-	}
-
-	public void setWriterName(String writerName) {
-		this.writerName = writerName;
-	}
-
-	public String getWriterType() {
-		return writerType;
-	}
-
-	public void setWriterType(String writerType) {
-		this.writerType = writerType;
-	}
-
-	public BoardTag getBoardTag() {
-		return boardTag;
-	}
-
-	public void setBoardTag(BoardTag boardTag) {
-		this.boardTag = boardTag;
-	}
-
-	@Override
-	public String toString() {
-		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", writeDate=" + writeDate + ", writerName=" + writerName + ", writerType=" + writerType
-				+ ", boardTag=" + boardTag + "]";
-	}
-    
-    
+       
 }

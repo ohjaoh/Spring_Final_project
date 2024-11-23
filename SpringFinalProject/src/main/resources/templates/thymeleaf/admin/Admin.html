@@ -5,6 +5,9 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/admin.css">
+
+	<script src="/js/admin.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -16,21 +19,23 @@
 		<div class="center d-flex mx-auto">
 			<div class="sidebar col-md-3 p-3">
 				<div class="login text-center p-3 mb-3">
-					<form id="userForm">
-						접속한 관리자 정보
-					</form>
+					<div id="userForm">
+						<h4 th:text="${AdminName}">로그인관리자이름</h4>
+					</div>
 				</div>
 				<div class="menuList">
 					<h5>회원관리</h5>
-					<h5 onclick="toggleBoardList()" >게시판관리</h5>
+					<h5 onclick="toggleBoardList()">게시판관리</h5>
 					<div id="boardTagListContent" class="hideBoardlistContent">
-						<h5 th:each="board : ${boardList}" th:text="${board}"></h5>
+						<h5 th:each="board : ${boardCategoryList}" th:text="${board}">온클릭을 추가해서 해당 게시판 프래그먼트를 내용으로 불러오는
+							형태로 진행할 예정</h5>
 					</div>
+					<h5 onclick="boardTagManagement('/AdminBoardCategoryManagement')">태그관리</h5>
 				</div>
 			</div>
 
-			<div class="content">
-				<h4>내용</h4>
+			<div class="content" id="fragment-container">
+				<div id="fragment-content">프래그먼트 컨텐츠</div>
 			</div>
 		</div>
 
@@ -38,8 +43,6 @@
 			<p>푸터</p>
 		</div>
 	</div>
-
-	<script src="/js/admin.js"></script>
 </body>
 
 </html>

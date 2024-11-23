@@ -1,4 +1,4 @@
-package Job;
+package Job.Admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +24,4 @@ public class AdminTest {
 		admin1.setAdminPosition("main_Admin");
 		adminImpl.registerAdmin(admin1);
 	}
-
 }

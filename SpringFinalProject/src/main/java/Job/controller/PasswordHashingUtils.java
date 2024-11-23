@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-public class AdminPasswordHashingUtils {
+public class PasswordHashingUtils {
 
 	// 랜덤 Salt 생성 메서드
 	public static String generateRandomSalt() {

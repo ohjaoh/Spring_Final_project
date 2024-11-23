@@ -69,13 +69,11 @@
 		<div class="center d-flex mx-auto">
 			<div class="sidebar col-md-3 p-3">
 				<div class="login text-center p-3 mb-3">
+					<!-- 임시로 관리자 로그인을 위해 사용 병합 시 무시-->
 					<form id="userForm" action="adminLogin" method="post">
-						<input name="userId" type="text" class="form-control mb-2" id="adminId" placeholder="아이디" required>
-						<input name="userPassword" type="password" class="form-control mb-2" id="adminPassword" placeholder="비밀번호" required>
-						<button type="submit" class="btn btn-primary btn-block">로그인</button>
-						<div class="mt-2">
-							<a href="registerPage">회원가입</a>
-						</div>
+						<input name="userId" type="text" required>
+						<input name="userPassword" type="password">
+						<button type="submit">로그인</button>
 					</form>
 				</div>
 				<div class="boardList p-3">
