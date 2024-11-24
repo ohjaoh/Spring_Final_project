@@ -12,6 +12,7 @@ public class UserTest {
 	@Autowired
 	private UserServiceImpl userServiceimpl;
 	
+	// 회원가입 test
 	@Test
 	public void resiterUserTest() {
 		 User user1 = new User();
