@@ -13,7 +13,7 @@ public class AdminTest {
 	@Autowired
 	private AdminServiceImpl adminImpl;
 
-	// 관리자 계정을 추가하는 test코드 솔트값은 지정 안해도 상관 없음
+	// 관리자 추가 test
 	@Test
 	public void inertAdmin() {
 		Admin admin1 = new Admin();
