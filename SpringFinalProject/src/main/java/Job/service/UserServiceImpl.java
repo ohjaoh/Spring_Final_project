@@ -10,6 +10,8 @@ import Job.controller.PasswordHashingUtils;
 import Job.entity.LoginInfo;
 import Job.entity.User;
 import Job.entity.UserLiteInfo;
+import Job.exception.ServiceErrorCode;
+import Job.exception.TotalServiceException;
 import Job.repository.UserRepository;
 
 @Service
@@ -21,6 +23,12 @@ public class UserServiceImpl implements UserService {
 	// 회원가입
 	@Override
 	public void registerUser(User user) {
+		User alreadyCheck = userRepo.findByUserId(user.getUserId());
+		// 아이디 중복 체크(서버)
+		if (alreadyCheck != null) {
+			throw new TotalServiceException("이미 등록존재하는 아이디입니다.", ServiceErrorCode.USER_ALREADY_EXISTS);
+		}
+
 		// 랜덤 Salt 생성
 		String salt = PasswordHashingUtils.generateRandomSalt();
 
@@ -105,7 +113,5 @@ public class UserServiceImpl implements UserService {
 		return user;
 
 	}
-
-	// id 중복체크
 
 }

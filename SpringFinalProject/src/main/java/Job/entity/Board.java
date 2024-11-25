@@ -43,7 +43,7 @@ public class Board {
 	private Date writeDate; // 게시판 작성일
 
 	@Size(max = 50, message = "작성자 이름은 50자 이내여야 합니다.") // 최대 길이 제한
-	private String writerName; // 작성자 이름
+	private String writerId; // 작성자 이름
 
 	private String boardState;
 
@@ -90,12 +90,12 @@ public class Board {
 		this.writeDate = writeDate;
 	}
 
-	public String getWriterName() {
-		return writerName;
+	public String getwriterId() {
+		return writerId;
 	}
 
-	public void setWriterName(String writerName) {
-		this.writerName = writerName;
+	public void setwriterId(String writerId) {
+		this.writerId = writerId;
 	}
 
 	public String getBoardState() {
@@ -117,7 +117,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", writeDate=" + writeDate + ", writerName=" + writerName + ", boardState=" + boardState
+				+ ", writeDate=" + writeDate + ", writerId=" + writerId + ", boardState=" + boardState
 				+ ", category=" + category + "]";
 	}
 
