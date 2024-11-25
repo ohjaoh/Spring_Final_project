@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <title>인력사무소</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="container">
-        <!-- Header Fragment -->
+        <!-- 헤더 -->
         <div th:replace="fragments/header :: header"></div>
 
-        <!-- Center Section -->
-        <div class="center d-flex mx-auto">
-            <!-- Sidebar Fragment -->
+        <div class="center d-flex">
+            <!-- 사이드바 -->
             <div th:replace="fragments/sidebar :: sidebar"></div>
-
             <!-- Content Fragment -->
-            <div th:replace="fragments/center :: center"></div>
+            <div th:replace="fragments/content :: content"></div>
         </div>
 
         <!-- Footer Fragment -->

@@ -28,3 +28,30 @@ function showAdminModal() {
 		}
 	});
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const registerLink = document.getElementById('registerLink');
+    const centerContainer = document.querySelector('.center');
+
+    if (registerLink && centerContainer) {
+        registerLink.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // 서버에서 registerPage 내용을 가져옴
+            fetch('/registerPage')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('네트워크 응답이 올바르지 않습니다.');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    // center 영역에 가져온 HTML 삽입
+                    centerContainer.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('회원가입 페이지 로드 중 오류 발생:', error);
+                });
+        });
+    }
+});

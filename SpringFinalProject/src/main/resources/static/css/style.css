@@ -1,0 +1,44 @@
+        .header, .center, .footer, .sidebar, .content, .login, .boardList {
+            border-radius: 2px;
+        }
+        .header {
+            background-color: lightgray;
+            height: 20vh;
+        }
+        .center {
+			
+            min-height: 80vh;
+        }
+        .sidebar {
+			width: 12.4vw;
+            border-top: 2px solid lightgray;
+            border-right: 2px solid lightgray;
+        }
+		.content{
+			border-top: 2px solid lightgray;
+			width: 45vw;
+			margin-left: 8px;
+			min-height: 99vh;
+		}
+        .login {
+			display: flex;
+			align-items: center;
+			text-align: center;
+			justify-content: center;
+			height: 20vh;
+        }
+        
+        .boardList {
+            border-top: 2px solid lightgray;
+            display: flex;
+            min-height: 80vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer {
+            border-top: 2px solid lightgray;
+            margin-top: 10px;
+            text-align: center;
+            padding: 1rem;
+            bottom: 0;
+        }

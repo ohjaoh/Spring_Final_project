@@ -38,7 +38,7 @@ public class LoginController {
 			session.setAttribute("LoginInfo", loginService.LoginAdminName(id));
 			// 지금은 임시로 바로 관리자로 진입하게 했지만 추후에는 index.html에 버튼형태로 진입하게 수정
 			System.out.println("관리자 로그인 성공");
-			return "redirec:/";
+			return "redirect:/";
 		} else if (loginService.userLogin(id, password)) {
 			session.setAttribute("LoginInfo", loginService.LoginUserName(id));
 			System.out.println("일반 회원 로그인 성공");
@@ -46,4 +46,10 @@ public class LoginController {
 		return "redirect:/";
 	}
 
+	@PostMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 무효화
+        System.out.println("로그아웃되었습니다.");
+        return "redirect:/"; // 로그아웃 후 메인 페이지로 리다이렉트
+    }
 }

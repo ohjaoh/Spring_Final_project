@@ -1,13 +1,23 @@
 <div th:fragment="sidebar">
     <div class="sidebar">
-        <div class="login text-center p-3 mb-3">
-            <form id="userForm" method="post" th:action="@{/login}">
-                <input name="id" type="text" class="form-control mb-1" placeholder="아이디" required>
-                <input name="password" type="password" class="form-control mb-1" placeholder="비밀번호" required>
-                <input  type="submit" value="로그인" class="btn btn-primary btn-block">
-                <input  type="submit" value="로그아웃" class="btn btn-danger btn-block">
-                <a class="register" th:href="@{/registerPage}">회원가입</a>
-            </form>
+        <div class="login">
+            <!-- 로그인 상태 확인 -->
+            <div th:if="${LoginInfo == null}">
+                <!-- 로그인 폼 -->
+                <form id="userForm" method="post" th:action="@{/login}">
+                    <input name="id" type="text" class="form-control mb-1" placeholder="아이디" required>
+                    <input name="password" type="password" class="form-control mb-1" placeholder="비밀번호" required>
+                    <input type="submit" value="로그인" class="btn btn-primary btn-block">
+                </form>
+                <a th:href="@{/registerPage}" class="btn btn-link">회원가입</a>
+            </div>
+            <div th:if="${LoginInfo != null}">
+                <!-- 로그인 후 상태 -->
+                <p class="mb-2">안녕하세요, <strong th:text="${LoginInfo.loginName}"></strong> 님!</p>
+                <form id="logoutForm" method="post" th:action="@{/logout}">
+                    <input type="submit" value="로그아웃" class="btn btn-danger btn-block">
+                </form>
+            </div>
         </div>
         <div class="boardList p-3">
             <h5>게시판 리스트</h5>

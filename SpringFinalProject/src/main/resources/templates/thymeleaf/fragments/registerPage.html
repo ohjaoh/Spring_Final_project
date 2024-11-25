@@ -1,0 +1,9 @@
+<div th:fragment="content">
+    <h4>회원가입 페이지</h4>
+    <form method="post" th:action="@{/register}">
+        <input type="text" name="username" class="form-control mb-2" placeholder="아이디" required>
+        <input type="password" name="password" class="form-control mb-2" placeholder="비밀번호" required>
+        <input type="email" name="email" class="form-control mb-2" placeholder="이메일" required>
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+</div>
