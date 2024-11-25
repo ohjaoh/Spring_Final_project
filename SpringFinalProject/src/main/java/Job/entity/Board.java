@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -31,7 +32,7 @@ public class Board {
 	@NotBlank(message = "제목이 비었습니다.")
 	@Size(max = 100, message = "제목은 100자 이내여야 합니다.") // 최대 길이 제한
 	private String boardTitle; // 게시판 제목
-	
+
 	@NotBlank(message = "내용이 비었습니다.")
 	@Column(columnDefinition = "TEXT")
 	private String boardContent; // 게시판 내용
@@ -44,13 +45,80 @@ public class Board {
 	@Size(max = 50, message = "작성자 이름은 50자 이내여야 합니다.") // 최대 길이 제한
 	private String writerName; // 작성자 이름
 
-	@Size(max = 20, message = "작성자 타입은 20자 이내여야 합니다.") // 최대 길이 제한
-	private String writerType; // 작성자 타입
+	private String boardState;
 
-    @ManyToOne // 다대일 관계 설정
-    @JoinColumn(name = "boardCategory", nullable = false) // 외래 키 컬럼
-    private BoardCategory category; // 게시판 태그
+	@ManyToOne // 다대일 관계 설정
+	@JoinColumn(name = "boardCategory", nullable = false) // 외래 키 컬럼
+	private BoardCategory category; // 게시판 카테고리
 
+	@PrePersist
+	protected void onCreate() {
+		if (boardState == null) {
+			boardState = "ACTIVE";
+		}
+	}
 
-       
+	public Long getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(Long boardNo) {
+		this.boardNo = boardNo;
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
+	public String getBoardContent() {
+		return boardContent;
+	}
+
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
+	}
+
+	public Date getWriteDate() {
+		return writeDate;
+	}
+
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
+	}
+
+	public String getWriterName() {
+		return writerName;
+	}
+
+	public void setWriterName(String writerName) {
+		this.writerName = writerName;
+	}
+
+	public String getBoardState() {
+		return boardState;
+	}
+
+	public void setBoardState(String boardState) {
+		this.boardState = boardState;
+	}
+
+	public BoardCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(BoardCategory category) {
+		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", writeDate=" + writeDate + ", writerName=" + writerName + ", boardState=" + boardState
+				+ ", category=" + category + "]";
+	}
+
 }

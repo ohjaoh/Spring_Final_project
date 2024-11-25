@@ -1,112 +1,127 @@
-        .header, .center, .footer, .sidebar, .content, .login, .boardList {
-            border-radius: 2px;
-        }
-        .header {
-            background-color: lightgray;
-            height: 20vh;
-        }
-        .center {
-            min-height: 80vh;
-        }
-        .sidebar {
-            border-top: 2px solid lightgray;
-            border-right: 2px solid lightgray;
-        }
-        .content {
-            border-top: 2px solid lightgray;
-            width: 91vh;
-            margin-left: 0.7vw;
-        }
-        .login {
-            padding: 1rem;
-        }
-        .login-button {
-        }
+        .header,
+        .center,
+        .footer,
+        .sidebar,
+        .content,
+        .login,
         .boardList {
-            border-top: 2px solid lightgray;
-            display: flex;
-            min-height: 80vh;
-            align-items: center;
-            justify-content: center;
+        	border-radius: 2px;
         }
+
+        .header {
+        	background-color: lightgray;
+        	height: 20vh;
+        }
+
+        .center {
+        	min-height: 80vh;
+        }
+
+        .sidebar {
+        	border-top: 2px solid lightgray;
+        	border-right: 2px solid lightgray;
+        }
+
+        .content {
+        	border-top: 2px solid lightgray;
+        	width: 91vh;
+        	margin-left: 0.7vw;
+        }
+
+        .login {
+        	padding: 1rem;
+        }
+
+        .login-button {}
+
+        .boardList {
+        	border-top: 2px solid lightgray;
+        	display: flex;
+        	min-height: 80vh;
+        	align-items: center;
+        	justify-content: center;
+        }
+
         .footer {
-            border-top: 2px solid lightgray;
-            margin-top: 10px;
-            text-align: center;
-            padding: 1rem;
-            bottom: 0;
+        	border-top: 2px solid lightgray;
+        	margin-top: 10px;
+        	text-align: center;
+        	padding: 1rem;
+        	bottom: 0;
         }
 
         .toggleSwitch {
-            width: 100px;
-            height: 30px;
-            display: block;
-            position: relative;
-            border: 1px solid lightgray;
-            border-radius: 30px;
-            background-color: white;
-            cursor: pointer;
+        	width: 100px;
+        	height: 30px;
+        	display: block;
+        	position: relative;
+        	border: 1px solid lightgray;
+        	border-radius: 30px;
+        	background-color: white;
+        	cursor: pointer;
         }
 
         .toggleSwitch .toggleButton {
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            top: 50%;
-            left: 4px;
-            transform: translateY(-50%);
-            border-radius: 50%;
-            background: green;
-            transition: all 0.2s ease-in;
+        	width: 20px;
+        	height: 20px;
+        	position: absolute;
+        	top: 50%;
+        	left: 4px;
+        	transform: translateY(-50%);
+        	border-radius: 50%;
+        	background: green;
+        	transition: all 0.2s ease-in;
         }
 
-        #toggle:checked ~ .toggleSwitch {
-            background: #fff;
+        #toggle:checked~.toggleSwitch {
+        	background: #fff;
         }
 
-        #toggle:checked ~ .toggleSwitch .toggleButton {
-            left: calc(100% - 24px);
-            background: red;
+        #toggle:checked~.toggleSwitch .toggleButton {
+        	left: calc(100% - 24px);
+        	background: red;
         }
 
         .toggleSwitch .label-left,
         .toggleSwitch .label-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 16px;
-            font-weight: bold;
+        	position: absolute;
+        	top: 50%;
+        	transform: translateY(-50%);
+        	font-size: 16px;
+        	font-weight: bold;
         }
 
         .toggleSwitch .label-left {
-            left: 5px;
-            color: red;
+        	left: 5px;
+        	color: red;
         }
 
         .toggleSwitch .label-right {
-            right: 5px;
-            color: green;
+        	right: 5px;
+        	color: green;
         }
 
         .toggleSwitch .label-left.hidden,
         .toggleSwitch .label-right.hidden {
-            display: none;
+        	display: none;
         }
 
-        .toggleSwitch, .toggleButton {
-            transition: all 0.2s ease-in;
+        .toggleSwitch,
+        .toggleButton {
+        	transition: all 0.2s ease-in;
         }
 
         .switch-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        	display: flex;
+        	justify-content: space-between;
+        	align-items: center;
         }
 
         .switch-container a {
-            margin-right: 10px; 
+        	margin-right: 10px;
         }
-        .register{
-			margin-bottom: 10px;
-			text-align: center;
-		}
+
+        .register {
+        	margin-bottom: 10px;
+        	text-align: center;
+        }

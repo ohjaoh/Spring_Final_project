@@ -1,10 +1,17 @@
 package Job.entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")
@@ -37,8 +44,14 @@ public class User {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 
+	@NotBlank(message = "회원상태가 비었습니다.")
+	private String userState;
+
 	@PrePersist
 	protected void onCreate() {
+		if (userState == null) {
+			userState = "ACTIVE";
+		}
 		createdAt = LocalDateTime.now();
 		updatedAt = LocalDateTime.now();
 	}
@@ -120,11 +133,19 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
+	public String getUserState() {
+		return userState;
+	}
+
+	public void setUserState(String userState) {
+		this.userState = userState;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userNo=" + userNo + ", userId=" + userId + ", userName=" + userName + ", userPassword="
 				+ userPassword + ", userSalt=" + userSalt + ", userEmail=" + userEmail + ", userAge=" + userAge
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", userState=" + userState + "]";
 	}
 
 }

@@ -14,8 +14,8 @@ public class BoardCategory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int boardCategoryNo;
 
-	@NotBlank(message = "태그가 비었습니다.")
-	private String CategoryName;
+	@NotBlank(message = "카테고리이름이 비었습니다.")
+	private String categoryName;
 
 	public int getBoardCategoryNo() {
 		return boardCategoryNo;
@@ -26,16 +26,16 @@ public class BoardCategory {
 	}
 
 	public String getCategoryName() {
-		return CategoryName;
+		return categoryName;
 	}
 
-	public void setCategoryName(String categoryName) {
-		CategoryName = categoryName;
+	public void setCategoryName(String boardCategoryName) {
+		categoryName = boardCategoryName;
 	}
 
 	@Override
 	public String toString() {
-		return "BoardCategory [boardCategoryNo=" + boardCategoryNo + ", CategoryName=" + CategoryName + "]";
+		return "BoardCategory [boardCategoryNo=" + boardCategoryNo + ", CategoryName=" + categoryName + "]";
 	}
 
 }

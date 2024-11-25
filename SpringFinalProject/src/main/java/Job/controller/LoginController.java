@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import Job.entity.LoginInfo;
 import Job.service.LoginService;
@@ -38,12 +39,19 @@ public class LoginController {
 			session.setAttribute("LoginInfo", loginService.LoginAdminName(id));
 			// 지금은 임시로 바로 관리자로 진입하게 했지만 추후에는 index.html에 버튼형태로 진입하게 수정
 			System.out.println("관리자 로그인 성공");
-			return "redirec:/";
+			return "redirect:/";
 		} else if (loginService.userLogin(id, password)) {
 			session.setAttribute("LoginInfo", loginService.LoginUserName(id));
 			System.out.println("일반 회원 로그인 성공");
 		}
 		return "redirect:/";
 	}
-
+	
+    
+    // 로그아웃 처리
+    @GetMapping("/logout")
+    public String logout(Model model) {
+        model.addAttribute("LoginInfo", null);  // 세션에서 사용자정보 삭제
+        return "redirect:/index";  // 로그아웃 후 메인 페이지로 리다이렉트
+    }
 }

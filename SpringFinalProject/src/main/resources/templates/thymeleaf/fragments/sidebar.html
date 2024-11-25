@@ -5,7 +5,7 @@
                 <input name="id" type="text" class="form-control mb-1" placeholder="아이디" required>
                 <input name="password" type="password" class="form-control mb-1" placeholder="비밀번호" required>
                 <input th:if="${session.AdminName != null}" type="submit" value="로그인" class="btn btn-primary btn-block">
-                <input th:if="${session.AdminName == null}" type="submit" value="로그아웃" class="btn btn-danger btn-block">
+                <input th:if="${session.LoginInfo.loginName == null}" type="submit" value="로그아웃" class="btn btn-danger btn-block">
                 <a class="register" th:href="@{/registerPage}">회원가입</a>
             </form>
         </div>
