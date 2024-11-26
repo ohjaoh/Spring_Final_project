@@ -1,43 +1,71 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>인력사무소</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+	<meta charset="UTF-8">
+	<title>인력사무소</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
-    <div class="container">
-        <!-- 헤더 -->
-        <div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<!-- 헤더 -->
+		<div th:replace="fragments/header :: header"></div>
 
-        <div class="center d-flex">
-            <!-- 사이드 -->
-            <div th:replace="fragments/sidebar :: sidebar"></div>
-            <!-- 가운데 -->
-            <div th:replace="fragments/content :: content"></div>
-        </div>
+		<div class="center d-flex">
+			<!-- 사이드 -->
+			<div th:replace="fragments/sidebar :: sidebar"></div>
 
-        <!-- 푸터 -->
-        <div th:replace="fragments/footer :: footer"></div>
-    </div>
+			<!-- 가운데 -->
+			<div id="content-area">
+				<div th:replace="~{fragments/content :: content}"></div>
+				<!-- 프래그먼트에서 동적 콘텐츠가 로드될 공간 -->
+			</div>
+		</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
+		<!-- 푸터 -->
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 	<script>
-	        function moveFragment(fragmentUrl) {
-	            fetch(fragmentUrl)
-	                .then(response => response.text())
-	                .then(html => {
-	                    document.getElementById('fragment-container').innerHTML = html;
-	                })
-	                .catch(error => console.error('Error loading fragment:', error));
-	        }
-	    </script>
-	
-    <script th:src="@{./js/index.js}"></script>
+		function moveFragment(fragmentUrl) {
+			fetch(fragmentUrl)
+				.then(response => response.text())
+				.then(html => {
+					document.getElementById('fragment-container').innerHTML = html;
+				})
+				.catch(error => console.error('Error loading fragment:', error));
+		}
+		function loadCategory(event, element) {
+			event.preventDefault(); // 기본 링크 동작 방지
+
+			const categoryId = element.getAttribute('data-id'); // 클릭한 카테고리의 ID 가져오기
+			console.log(`Category ID: ${categoryId}`); // 확인용 로그
+
+			fetch(`/board/category/${categoryId}`) // 서버로 AJAX 요청
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.text(); // 서버에서 HTML 프래그먼트 가져오기
+				})
+				.then(html => {
+					document.getElementById('content-area').innerHTML = html; // 가운데 content 영역 업데이트
+				})
+				.catch(error => {
+					console.error('Error loading category:', error);
+					alert('카테고리를 불러오는 중 문제가 발생했습니다.');
+				});
+		}
+	</script>
+
+	<script th:src="@{./js/index.js}"></script>
 
 </body>
+
 </html>

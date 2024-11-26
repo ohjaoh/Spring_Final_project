@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import Job.entity.Board;
+import Job.entity.BoardCategory;
 import Job.entity.LoginInfo;
 import Job.service.BoardServiceImpl;
 
@@ -21,13 +22,13 @@ public class BoardTest {
 	public void insertBoardTest() {
 		LoginInfo userInfo = new LoginInfo();
 		userInfo.setLoginId("관리자");
-		String boardCategory = "구인";
+		String boardCategory = "구직";
 
 		for (int i = 0; i < 5; i++) {
 			Board board = new Board();
-			board.setBoardTitle("게시글 제목" + i);
-			board.setBoardContent("게시글 내용" + i);
-			board.setwriterId("tester" + i);
+			board.setBoardTitle("구직게시글 제목" + i);
+			board.setBoardContent("구직게시글 내용" + i);
+			board.setWriterId("tester" + i);
 
 			boardServiceImpl.insertBoard(board, boardCategory, userInfo);
 		}
@@ -60,7 +61,9 @@ public class BoardTest {
 	// 게시판 목록
 //	@Test
 	public void boardList() {
-		List<Board> boardList = boardServiceImpl.boardList();
+		BoardCategory boardCategory = new BoardCategory();
+		boardCategory.setBoardCategoryNo(1);
+		List<Board> boardList = boardServiceImpl.boardList(boardCategory);
 		System.out.println(boardList);
 
 	}

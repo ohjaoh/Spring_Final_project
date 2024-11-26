@@ -16,9 +16,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    
 
-    
+
     // 로그아웃 처리
     @GetMapping("/logout")
     public String logout(Model model) {

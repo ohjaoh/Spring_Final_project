@@ -1,5 +1,8 @@
 package Job.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
+import Job.entity.BoardCategory;
 import Job.entity.LoginInfo;
+import Job.service.BoardCategoryService;
 import Job.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 
@@ -17,6 +22,9 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private BoardCategoryService boardCategoryService;
 
 	// 루트
 	@GetMapping("/")
@@ -26,8 +34,18 @@ public class LoginController {
 			System.out.println("로그인한 사용자 정보가 존재합니다.");
 			model.addAttribute("LoginInfo", loginInfo);
 			// 이거 기반으로 th:if 사용 가능하도록 백엔드만 수정
+		} 
+		
+		// 카테고리항목을 받아와서 그 중 이름만 추출하여 모델에 추가
+		List<BoardCategory> boardCategoryList = boardCategoryService.BoardCategoryList();
+		List<String> boardCategoryNameList = new ArrayList<>();
+
+		// boardCategoryList에서 boardCategoryName만 추출하는 반복문
+		for (BoardCategory boardCategory : boardCategoryList) {
+			boardCategoryNameList.add(boardCategory.getCategoryName());
 		}
 
+		model.addAttribute("boardCategoryList", boardCategoryNameList);
 		return "index";
 	}
 
@@ -48,9 +66,9 @@ public class LoginController {
 	}
 
 	@PostMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate(); // 세션 무효화
-        System.out.println("로그아웃되었습니다.");
-        return "redirect:/"; // 로그아웃 후 메인 페이지로 리다이렉트
-    }
+	public String logout(HttpSession session) {
+		session.invalidate(); // 세션 무효화
+		System.out.println("로그아웃되었습니다.");
+		return "redirect:/"; // 로그아웃 후 메인 페이지로 리다이렉트
+	}
 }

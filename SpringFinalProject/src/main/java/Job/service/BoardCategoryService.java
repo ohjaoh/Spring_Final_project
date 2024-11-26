@@ -13,4 +13,5 @@ public interface BoardCategoryService {
 	public void updateBoardCategory(int categoryNo, String updateCategoryName, LoginInfo loginfo);
 
 	public void deleteBoardCategory(int categoryNo, LoginInfo loginfo);
+	public BoardCategory findBoardCategory(String boardCategoryName);
 }

@@ -81,4 +81,10 @@ public class BoardCategoryServiceImpl implements BoardCategoryService {
 		System.out.println("관리자가 아닙니다.");
 
 	}
+	@Override
+	public BoardCategory findBoardCategory(String boardCategoryName) {
+		BoardCategory boardCategory = boardCategoryRepo.findBycategoryName(boardCategoryName);
+
+		return boardCategory;
+	}
 }

@@ -25,10 +25,11 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시판 등록 로그인한 사용자의 정보를 이용
 	// 카테고리이름을 String - 게시판 작성 시 라디오 버튼이나 드롭다운으로 선택한 카테고리임
+	@Override
 	public void insertBoard(Board board, String categoryName, LoginInfo user) {
 		BoardCategory boardCategory = boardCategoryRepo.findBycategoryName(categoryName);
 
-		board.setwriterId(user.getLoginId());
+		board.setWriterId(user.getLoginId());
 
 		board.setCategory(boardCategory);
 		boardRepo.save(board);
@@ -36,6 +37,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// 게시글 조회
+	@Override
 	public Board boardPage(Long boardNo) {
 		// 개시판 번호로 조회하고 만약 없다면 예외를 발생
 		return boardRepo.findById(boardNo).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
@@ -43,15 +45,17 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시글 수정
 	// 수정할 데이터를 게시판객체로 받아서
+	@Override
 	public void updateBoard(Board board, LoginInfo loginInfo) {
 		// 로그인한 사람의 게시글만 수정가능
-		if (loginInfo.getLoginId().equals(board.getwriterId())) {
+		if (loginInfo.getLoginId().equals(board.getWriterId())) {
 			boardRepo.save(board);
 		}
 
 	}
 
 	// 게시판 삭제 하는 함수
+	@Override
 	public void deleteBoard(Long boardNo, LoginInfo loginInfo) {
 		// 게시글을 찾아서 board객체로 연결
 		Board board = boardRepo.findById(boardNo).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
@@ -68,7 +72,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 
 		// 로그인한 사람이 본인이거나 관리자인 경우
-		if (loginInfo.getLoginId().equals(board.getwriterId()) || isAdmin) {
+		if (loginInfo.getLoginId().equals(board.getWriterId()) || isAdmin) {
 			// 게시글 상태를 삭제됨으로 바꾼다.
 			board.setBoardState("Deleted");
 			// 변경된 상태를 저장한다.
@@ -79,11 +83,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// 게시판 목록 불러오는 함수
-	public List<Board> boardList() {
+	@Override
+	public List<Board> boardList(BoardCategory categoryNum) {
 		String status = "ACTIVE";
 
 		// 상태가 활성화된 녀석들만 조회
-		List<Board> boardList = boardRepo.findByboardState(status);
+		List<Board> boardList = boardRepo.findByBoardStateAndCategory(status, categoryNum);
 		return boardList;
 	}
 
