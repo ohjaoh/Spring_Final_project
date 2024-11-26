@@ -4,29 +4,40 @@
     <meta charset="UTF-8">
     <title>인력사무소</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="container">
-        <!-- Header Fragment -->
+        <!-- 헤더 -->
         <div th:replace="fragments/header :: header"></div>
 
-        <!-- Center Section -->
-        <div class="center d-flex mx-auto">
-            <!-- Sidebar Fragment -->
+        <div class="center d-flex">
+            <!-- 사이드 -->
             <div th:replace="fragments/sidebar :: sidebar"></div>
-
-            <!-- Content Fragment -->
-            <div th:replace="fragments/center :: center"></div>
+            <!-- 가운데 -->
+            <div th:replace="fragments/content :: content"></div>
         </div>
 
-        <!-- Footer Fragment -->
+        <!-- 푸터 -->
         <div th:replace="fragments/footer :: footer"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script th:src="@{/js/script.js}"></script>
+	
+	<script>
+	        function moveFragment(fragmentUrl) {
+	            fetch(fragmentUrl)
+	                .then(response => response.text())
+	                .then(html => {
+	                    document.getElementById('fragment-container').innerHTML = html;
+	                })
+	                .catch(error => console.error('Error loading fragment:', error));
+	        }
+	    </script>
+	
+    <script th:src="@{./js/index.js}"></script>
+
 </body>
 </html>

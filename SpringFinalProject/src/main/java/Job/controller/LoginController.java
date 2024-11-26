@@ -47,11 +47,10 @@ public class LoginController {
 		return "redirect:/";
 	}
 
-	// 로그아웃 처리
-	@GetMapping("/logout")
-	public String logout(Model model, SessionStatus status) {
-		status.setComplete(); // 세션을 완료하여 로그아웃
-		model.addAttribute("LoginInfo", null); // 세션에서 사용자정보 삭제
-		return "redirect:/index"; // 로그아웃 후 메인 페이지로 리다이렉트
-	}
+	@PostMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 무효화
+        System.out.println("로그아웃되었습니다.");
+        return "redirect:/"; // 로그아웃 후 메인 페이지로 리다이렉트
+    }
 }

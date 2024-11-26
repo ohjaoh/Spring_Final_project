@@ -16,8 +16,8 @@ function showAdminModal() {
 		}
 	}).then((result) => {
 		if (result.isConfirmed) {
-			if (result.value === '1234') { // 비밀번호 확인
-				window.location.href = '/admin'; // 관리자 페이지로 이동
+			if (result.value === '1234') { 
+				window.location.href = '/admin'; 
 			} else {
 				Swal.fire({
 					icon: 'error',
@@ -28,3 +28,39 @@ function showAdminModal() {
 		}
 	});
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const registerLink = document.getElementById('registerLink');
+    const centerContainer = document.querySelector('.center');
+
+    if (registerLink && centerContainer) {
+        registerLink.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            fetch('/registerPage')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('네트워크 응답이 올바르지 않습니다.');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    centerContainer.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('회원가입 페이지 로드 중 오류 발생:', error);
+                });
+        });
+    }
+});
+
+
+    function moveFragment(fragmentUrl) {
+        fetch(fragmentUrl) 
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('fragment-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading fragment:', error));
+    }
+
