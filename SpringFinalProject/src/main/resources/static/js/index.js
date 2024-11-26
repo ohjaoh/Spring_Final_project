@@ -16,8 +16,8 @@ function showAdminModal() {
 		}
 	}).then((result) => {
 		if (result.isConfirmed) {
-			if (result.value === '1234') { // 비밀번호 확인
-				window.location.href = '/admin'; // 관리자 페이지로 이동
+			if (result.value === '1234') { 
+				window.location.href = '/admin'; 
 			} else {
 				Swal.fire({
 					icon: 'error',
@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
         registerLink.addEventListener('click', function (event) {
             event.preventDefault();
 
-            // 서버에서 registerPage 내용을 가져옴
             fetch('/registerPage')
                 .then(response => {
                     if (!response.ok) {
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     return response.text();
                 })
                 .then(html => {
-                    // center 영역에 가져온 HTML 삽입
                     centerContainer.innerHTML = html;
                 })
                 .catch(error => {
@@ -55,3 +53,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+    function moveFragment(fragmentUrl) {
+        fetch(fragmentUrl) 
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('fragment-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading fragment:', error));
+    }
+

@@ -6,7 +6,6 @@
             height: 20vh;
         }
         .center {
-			
             min-height: 80vh;
         }
         .sidebar {
@@ -42,3 +41,8 @@
             padding: 1rem;
             bottom: 0;
         }
+		.content-img{
+			padding: 12px;
+			margin-left: 6px;
+			width: 22vw;
+		}
