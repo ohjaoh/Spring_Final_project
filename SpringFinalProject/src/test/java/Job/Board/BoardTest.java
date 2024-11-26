@@ -26,8 +26,7 @@ public class BoardTest {
 		for (int i = 0; i < 5; i++) {
 			Board board = new Board();
 			board.setBoardTitle("게시글 제목" + i);
-			board.setBoardContent("회사명: ABC Tech Solutions\r\n" + "채용 직무: 프론트엔드 개발자 (React.js, Vue.js)\r\n"
-					+ "근무 지역: 서울 강남구\r\n" + "구인" + i);
+			board.setBoardContent("게시글 내용" + i);
 			board.setwriterId("tester" + i);
 
 			boardServiceImpl.insertBoard(board, boardCategory, userInfo);

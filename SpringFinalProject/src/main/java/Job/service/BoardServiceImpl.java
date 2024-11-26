@@ -80,7 +80,10 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시판 목록 불러오는 함수
 	public List<Board> boardList() {
-		List<Board> boardList = boardRepo.findAll();
+		String status = "ACTIVE";
+
+		// 상태가 활성화된 녀석들만 조회
+		List<Board> boardList = boardRepo.findByboardState(status);
 		return boardList;
 	}
 

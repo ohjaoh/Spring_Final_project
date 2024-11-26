@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// 회원정보 수정
-	// 수정된 데이터만 받아서 처리하도록 수정
+	// 수정된 데이터를 User 객체로 받아서 처리
 	@Override
 	public void userUpdate(User user) {
 		// 랜덤 Salt 생성
