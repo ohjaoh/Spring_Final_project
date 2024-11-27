@@ -14,11 +14,11 @@ public class BoardController {
 	
 	@GetMapping("/jobOfferBoardList")
     public String getjobOfferBoardList() {
-        return "board/jobOfferBoardList"; //
+        return "thymeleaf/fragments/jobOfferBoardList"; //
     }
 
     @GetMapping("/jobSearchBoardList")
     public String getjobSearchBoardList() {
-        return "board/jobSearchBoardList"; //
+        return "thymeleaf/fragments/jobSearchBoardList"; //
     }
 }
