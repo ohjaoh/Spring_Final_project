@@ -4,6 +4,7 @@ public class LoginInfo {
 
 	private String loginName;
 	private String loginId;
+	private String loginType;
 
 	public String getLoginName() {
 		return loginName;
@@ -21,4 +22,13 @@ public class LoginInfo {
 		this.loginId = loginId;
 	}
 
+	public String getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(String loginType) {
+		this.loginType = loginType;
+	}
+
+	
 }

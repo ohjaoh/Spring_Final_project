@@ -18,16 +18,19 @@
 				<form id="logoutForm" method="post" th:action="@{/logout}">
 					<input type="submit" value="로그아웃" class="btn btn-danger btn-block">
 				</form>
-				<div th:if="${LoginInfo.loginType == '관리자'}">
-					<a th:href="@{/admin}">관리자</a>
-				</div>
 			</div>
 		</div>
-		<div class="boardList p-3">
-			<h5 th:each="category : ${boardCategoryList}">
-				<a href="#" th:attr="data-id=${category}" onclick=" loadCategory(event, this)"
-					th:text="${category}"></a>
-			</h5>
+		<div class="boardList p-3"> <a href="#" onclick="findAllBoards(event, this)"
+				style="text-decoration: none; color: inherit;">
+				<h5>게시판관리</h5>
+			</a>
+			<a href="#" onclick="findAllCategory(event, this)" style="text-decoration: none; color: inherit;">
+				<h5>카테고리관리</h5>
+			</a>
+			<a href="#" onclick="findAllUsers(event, this)" style="text-decoration: none; color: inherit;">
+				<h5>회원관리</h5>
+			</a>
+
 		</div>
 	</div>
 </div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>인력사무소</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<div class="container">
+		<!-- 헤더 -->
+		<div th:replace="fragments/header :: header"></div>
+
+		<!-- 내용 -->
+		<div class="center d-flex">
+
+			<!-- 드랍박스로 카테고리 선택 -->
+			<div>
+				<label for="category">카테고리 선택:</label>
+				<select id="category" name="category">
+					<option th:each="category : ${boardCategoryList}" th:value="${category}" th:text="${category}">
+						카테고리
+					</option>
+				</select>
+			</div>
+
+			<!-- 제목 작성 -->
+			<div>
+				<label for="title">제목:</label>
+				<input type="text" id="title" name="title" placeholder="제목을 입력하세요">
+			</div>
+
+
+			<!-- 내용 작성 -->
+			<div>
+				<label for="content">내용:</label>
+				<textarea id="content" name="content" rows="5" placeholder="내용을 입력하세요"></textarea>
+			</div>
+
+			<!-- 작성완료 버튼 -->
+			<div>
+				<button type="button">작성 완료</button>
+			</div>
+		</div>
+
+		<!-- 푸터 -->
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+
+
+</body>
+
+</html>

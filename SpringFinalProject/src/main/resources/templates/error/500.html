@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>500 error page!!</title>
+</head>
+
+<body>
+	<center>
+		<h1>
+			<font color="red">500 error!</font>
+		</h1>
+		<h3>
+			<font color="green">요청하신 파일은 존재하지 않습니다.</font>
+		</h3>
+		<a th:href="@{/}" )>index홈</a>
+		<table>
+			<tr bgcolor="gray">
+				<td>
+					<p th:text="${'예외 발생 경로명:' + path}"></p>
+					<p th:text="${'예외 발생 시간:' + timestamp}"></p>
+					<p th:text="${'예외 타입:' + exception}"></p>
+					<p th:text="${'예외 메시지:' + message}"></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p th:text="${trace}"></p>
+				</td>
+			</tr>
+		</table>
+	</center>
+</body>
+
+</html>

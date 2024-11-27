@@ -1,48 +1,115 @@
-<html xmlns="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>인력사무소</title>
 	<meta charset="UTF-8">
+	<title>인력사무소</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/admin.css">
-
-	<script src="/js/admin.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 	<div class="container">
-		<div class="header text-center p-3 mb-2">
-			<h2>관리자페이지</h2>
-		</div>
+		<!-- 헤더 -->
+		<div th:replace="fragments/header :: header"></div>
 
-		<div class="center d-flex mx-auto">
-			<div class="sidebar col-md-3 p-3">
-				<div class="login text-center p-3 mb-3">
-					<div id="userForm">
-						<h4 th:text="${LoginInfo.loginName}">로그인관리자이름</h4>
-					</div>
-				</div>
-				<div class="menuList">
-					<h5>회원관리</h5>
-					<h5 onclick="toggleBoardList()">게시판관리</h5>
-					<div id="boardTagListContent" class="hideBoardlistContent">
-						<h5 th:each="board : ${boardCategoryList}" th:text="${board}">온클릭을 추가해서 해당 게시판 프래그먼트를 내용으로 불러오는
-							형태로 진행할 예정</h5>
-					</div>
-					<h5 onclick="boardTagManagement('/AdminBoardCategoryManagement')">태그관리</h5>
-				</div>
-			</div>
+		<div class="center d-flex">
+			<!-- 사이드 -->
+			<div th:replace="fragments/admin/adminSidebar :: sidebar"></div>
 
-			<div class="content" id="fragment-container">
-				<div id="fragment-content">프래그먼트 컨텐츠</div>
+			<!-- 가운데 -->
+			<div id="content-area">
+				<div th:replace="~{fragments/admin/adminContent :: content}"></div>
+				<!-- 프래그먼트에서 동적 콘텐츠가 로드될 공간 -->
 			</div>
 		</div>
 
-		<div class="footer">
-			<p>푸터</p>
+		<!-- 푸터 -->
+		<div th:replace="fragments/footer :: footer" onclick="boardTagManagement('/AdminBoardCategoryManagement')">
 		</div>
 	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script>
+		function moveFragment(fragmentUrl) {
+			fetch(fragmentUrl)
+				.then(response => response.text())
+				.then(html => {
+					document.getElementById('fragment-container').innerHTML = html;
+				})
+				.catch(error => console.error('Error loading fragment:', error));
+		}
+
+		// 게시판 관리 데이터 로드 함수
+		function findAllBoards(event, element) {
+			event.preventDefault(); // 기본 링크 동작 방지
+
+			const categoryId = "All";
+			console.log(`Category ID: ${categoryId}`); // 확인용 로그
+
+			fetch(`/admin/adminBoard/${categoryId}`) // 서버로 AJAX 요청
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.text(); // 서버에서 HTML 프래그먼트 가져오기
+				})
+				.then(html => {
+					document.getElementById('content-area').innerHTML = html; // content-area 업데이트
+				})
+				.catch(error => {
+					console.error('Error loading category:', error);
+					alert('카테고리를 불러오는 중 문제가 발생했습니다.');
+				});
+		}
+
+		// 카테고리 관리 데이터 로드 함수
+		function findAllCategory(event, element) {
+			event.preventDefault(); // 기본 링크 동작 방지
+
+			fetch(`/admin/adminCategory`) // 서버로 카테고리 데이터 요청
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.text(); // 서버에서 HTML 프래그먼트 가져오기
+				})
+				.then(html => {
+					document.getElementById('content-area').innerHTML = html; // content-area 업데이트
+				})
+				.catch(error => {
+					console.error('Error loading categories:', error);
+					alert('카테고리를 불러오는 중 문제가 발생했습니다.');
+				});
+		}
+
+		// 회원 관리 데이터 로드 함수
+		function findAllUsers(event, element) {
+			event.preventDefault(); // 기본 링크 동작 방지
+
+			fetch(`/admin/adminUsers`) // 서버로 회원 데이터 요청
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.text(); // 서버에서 HTML 프래그먼트 가져오기
+				})
+				.then(html => {
+					document.getElementById('content-area').innerHTML = html; // content-area 업데이트
+				})
+				.catch(error => {
+					console.error('Error loading users:', error);
+					alert('회원 정보를 불러오는 중 문제가 발생했습니다.');
+				});
+		}
+
+	</script>
+
+	<script th:src="@{./js/admin.js}"></script>
+
 </body>
 
 </html>

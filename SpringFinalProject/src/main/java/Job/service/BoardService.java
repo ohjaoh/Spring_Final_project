@@ -12,4 +12,5 @@ public interface BoardService {
 	public void updateBoard(Board board, LoginInfo loginInfo);
 	public void deleteBoard(Long boardNo, LoginInfo loginInfo);
 	public List<Board> boardList(BoardCategory categoryNum);
+	public List<Board> findAll();
 }

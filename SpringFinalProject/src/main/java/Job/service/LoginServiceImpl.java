@@ -64,6 +64,7 @@ public class LoginServiceImpl implements LoginService {
 		Admin admin = adminRepo.findByAdminId(inputAdminId);
 		loginInfo.setLoginName(admin.getAdminName());
 		loginInfo.setLoginId(admin.getAdminId());
+		loginInfo.setLoginType("관리자");
 		return loginInfo;
 	}
 
@@ -74,6 +75,7 @@ public class LoginServiceImpl implements LoginService {
 		User user = userRepo.findByUserId(inputUserId);
 		loginInfo.setLoginId(user.getUserId());
 		loginInfo.setLoginName(user.getUserName());
+		loginInfo.setLoginType("회워");
 
 		return loginInfo;
 	}

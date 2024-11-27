@@ -77,8 +77,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// 회원조회
-//	일단 로그인한 경우에만 사용한다고 가정하고 로그인 정보에서 가져오는 것으로 했으나
-//	수정하여 Strig userId로 해도 상관없음
 	@Override
 	public User userInfo(LoginInfo loginInfo) {
 		User user = new User();
@@ -112,6 +110,13 @@ public class UserServiceImpl implements UserService {
 		user = userRepo.findByUserId(userId);
 		return user;
 
+	}
+
+	// 회원목록(관리자)
+	@Override
+	public List<User> getUserList() {
+		List<User> userList = userRepo.findAll();
+		return userList;
 	}
 
 }

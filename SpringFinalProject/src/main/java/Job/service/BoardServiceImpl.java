@@ -92,4 +92,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardList;
 	}
 
+	@Override
+	public List<Board> findAll() {
+		// 상태가 활성화된 녀석들만 조회
+		List<Board> boardList = boardRepo.findAll();
+		return boardList;
+	}
+
 }
