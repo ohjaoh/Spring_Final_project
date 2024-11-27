@@ -1,0 +1,41 @@
+<div th:fragment="MyPage" class="content container mt-5">
+	<h1 class="text-center mb-4">My Page</h1>
+
+	<div class="row justify-content-center">
+		<!-- User Info Card -->
+		<div class="card shadow-sm" style="width: 100%; max-width: 600px;">
+			<div class="card-header bg-primary text-white">
+				<h3 class="card-title mb-0">회원 정보</h3>
+			</div>
+			<div class="card-body">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						<strong>유저 ID:</strong> <span th:text="${user.userId}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>회원 이름:</strong> <span th:text="${user.userName}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>이메일:</strong> <span th:text="${user.userEmail}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>나이:</strong> <span th:text="${user.userAge}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>가입일:</strong>
+						<span
+							th:text="${#strings.substring(user.createdAt.toString(), 0, 10) + ' ' + #strings.substring(user.createdAt.toString(), 11, 16)}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>최근 수정일:</strong>
+						<span
+							th:text="${#strings.substring(user.updatedAt.toString(), 0, 10) + ' ' + #strings.substring(user.updatedAt.toString(), 11, 16)}"></span>
+					</li>
+					<li class="list-group-item">
+						<strong>회원 상태:</strong> <span th:text="${user.userState}"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

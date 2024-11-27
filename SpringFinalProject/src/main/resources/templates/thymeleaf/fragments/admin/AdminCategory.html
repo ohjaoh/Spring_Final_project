@@ -8,19 +8,31 @@
 				<th>관리</th>
 			</tr>
 		</thead>
-		<!--
-			<tbody>
-			<tr th:each="board : ${boardList}">
-				<td th:text="${board.boardNo != null ? board.boardNo : ''}"></td>
+		<tbody>
+			<tr th:each="boardCategory : ${boardCategoryList}">
+				<td th:text="${boardCategory.categoryName}"></td>
 				<td>
+					<button>수정</button>
 					<button>삭제</button>
-					 삭제버튼은 디자인만 기능은 추후  
 				</td>
 			</tr>
 		</tbody>
-	-->
-	<!-- 카테고리 생성 폼 -->
-		<button>카테고리 생성 버튼</button>
 
 	</table>
+	<!-- 카테고리 생성 버튼 -->
+	<div style="margin-top: 10px;">
+		<button type="button" class="btn btn-primary" id="toggleFormBtn" onclick="toggleCreateCategoryFormBtn()">카테고리 생성</button>
+	</div>
+
+	<!-- 카테고리 생성 폼 (초기 상태: 숨김) -->
+	<div id="createCategoryForm" style="margin-top: 20px; display: none;">
+		<h3>카테고리 생성</h3>
+		<form action="/admin/createCategory" method="post" th:action="@{/admin/createCategory}">
+			<div class="form-group">
+				<label for="categoryName">카테고리 이름</label>
+				<input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="카테고리 이름 입력">
+			</div>
+			<button type="submit" class="btn btn-success">생성</button>
+		</form>
+	</div>
 </div>

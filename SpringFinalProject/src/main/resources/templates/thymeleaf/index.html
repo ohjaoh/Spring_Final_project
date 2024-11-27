@@ -45,7 +45,7 @@
 			event.preventDefault(); // 기본 링크 동작 방지
 
 			const categoryId = element.getAttribute('data-id'); // 클릭한 카테고리의 ID 가져오기
-			console.log(`Category ID: ${categoryId}`); // 확인용 로그
+			//console.log(`Category ID: ${categoryId}`); // 확인용 로그
 
 			fetch(`/board/category/${categoryId}`) // 서버로 AJAX 요청
 				.then(response => {
@@ -61,6 +61,28 @@
 					console.error('Error loading category:', error);
 					alert('카테고리를 불러오는 중 문제가 발생했습니다.');
 				});
+		}
+		function loadMyPage(event, element) {
+			event.preventDefault(); // 기본 링크 동작 방지
+
+			fetch(`/user/myPage`) // 서버로 AJAX 요청
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.text();
+				})
+				.then(html => {
+					document.getElementById('content-area').innerHTML = html;
+				})
+				.catch(error => {
+					console.error('Error loading category:', error);
+					alert('회원정보를 불러오는 중 문제가 발생했습니다.');
+				});
+		}
+
+		function clickBoardItem() {
+			console.log("게시판 아이템이 클릭됨")
 		}
 	</script>
 

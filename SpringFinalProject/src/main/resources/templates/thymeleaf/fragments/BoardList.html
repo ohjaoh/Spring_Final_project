@@ -8,21 +8,20 @@
 				<th>내용</th>
 				<th>작성자</th>
 				<th>작성일</th>
-				<!-- <th>상태</th> -->
-				<!-- <th>카테고리</th> -->
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="board : ${boardList}">
-				<td th:text="${board.boardNo != null ? board.boardNo : ''}"></td>
-				<td th:text="${board.boardTitle != null ? board.boardTitle : ''}"></td>
-				<td th:text="${board.boardContent != null ? board.boardContent : ''}"></td>
-				<td th:text="${board.writerId != null ? board.writerId : ''}"></td>
-				<td th:text="${board.writeDate != null ? #dates.format(board.writeDate, 'yyyy-MM-dd HH:mm') : ''}"></td>
-				<!-- <td th:text="${board.boardState != null ? board.boardState : ''}"></td> -->
-				<!-- <td th:text="${board.category != null && board.category.categoryName != null ? board.category.categoryName : ''}"></td> -->
+			<tr th:each="board : ${boardList}" th:attr="data-board-no=${board.boardNo}" onclick="clickBoardItem()">
+				<td th:text="${board.boardNo}"></td>
+				<td th:text="${board.boardTitle}"></td>
+				<td th:text="${board.boardContent}"></td>
+				<td th:text="${board.writerId}"></td>
+				<td th:text="${#dates.format(board.writeDate, 'yyyy-MM-dd HH:mm')}"></td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="/boardWrite"> 글작성</a>
+	<div th:if="${session.LoginInfo}">
+		<a href="/boardWrite">글작성</a>
+	</div>
+
 </div>

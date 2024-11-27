@@ -15,21 +15,18 @@
 		</thead>
 		<tbody>
 			<tr th:each="board : ${boardList}">
-				<td th:text="${board.boardNo != null ? board.boardNo : ''}"></td>
-				<td th:text="${board.boardTitle != null ? board.boardTitle : ''}"></td>
-				<td th:text="${board.boardContent != null ? board.boardContent : ''}"></td>
-				<td th:text="${board.writerId != null ? board.writerId : ''}"></td>
-				<td th:text="${board.writeDate != null ? #dates.format(board.writeDate, 'yyyy-MM-dd HH:mm') : ''}"></td>
-				<td th:text="${board.boardState != null ? board.boardState : ''}"></td>
-				<td
-					th:text="${board.category != null && board.category.categoryName != null ? board.category.categoryName : ''}">
-				</td>
-				<td>
-					<button>삭제</button>
-					<!-- 삭제버튼은 디자인만 기능은 추후  -->
+				<td th:text="${board.boardNo}"></td>
+				<td th:text="${board.boardTitle}"></td>
+				<td th:text="${board.boardContent}"></td>
+				<td th:text="${board.writerId}"></td>
+				<td th:text="${#dates.format(board.writeDate, 'yyyy-MM-dd HH:mm')}"></td>
+				<td th:text="${board.boardState}"></td>
+				<td th:text="${board.category?.categoryName}"></td>
+				<td th:if="${board.boardState != 'Deleted'}">
+					<button type="button" class="btn btn-danger btn-sm">삭제</button>
 				</td>
 			</tr>
 		</tbody>
-		
+
 	</table>
 </div>

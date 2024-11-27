@@ -106,8 +106,20 @@
 				});
 		}
 
-	</script>
+		function toggleCreateCategoryFormBtn() {
+			const createCategoryForm = document.getElementById("createCategoryForm");
+			const toggleFormBtn = document.getElementById("toggleFormBtn");
 
+			if (createCategoryForm.style.display === "none" || createCategoryForm.style.display === "") {
+				createCategoryForm.style.display = "block";
+				toggleFormBtn.textContent = "닫기"
+			} else {
+				createCategoryForm.style.display = "none";
+				toggleFormBtn.textContent = "카테고리 생성"
+			}
+
+		}
+	</script>
 	<script th:src="@{./js/admin.js}"></script>
 
 </body>

@@ -14,20 +14,23 @@
 				<th>관리</th>
 			</tr>
 		</thead>
-
 		<tbody>
-			<tr th:each="user : ${userList}">
-				<td th:text="${user.userNo != null ? user.userNo : ''}"></td>
-				<td th:text="${user.userId != null ? user.userId : ''}"></td>
-				<td th:text="${user.userName != null ? user.userName : ''}"></td>
-				<td th:text="${user.userEmail != null ? user.userEmail : ''}"></td>
-				<td th:text="${user.userAge != null ? user.userAge : ''}"></td>
-				<td th:text="${user.userState != null ? user.userState : ''}"></td>
-				<td th:text="${user.createdAt != null ? #dates.format(user.createdAt, 'yyyy-MM-dd HH:mm') : ''}"></td>
-				<td th:text="${user.updatedAt != null ? #dates.format(user.updatedAt, 'yyyy-MM-dd HH:mm') : ''}"></td>
-				<td>
-					<button>삭제</button>
-					삭제버튼은 디자인만, 기능은 추후 추가 예정
+			<tr th:each="user : ${UserList}">
+				<td th:text="${user.userNo}"></td>
+				<td th:text="${user.userId}"></td>
+				<td th:text="${user.userName}"></td>
+				<td th:text="${user.userEmail}"></td>
+				<td th:text="${user.userAge}"></td>
+				<td th:text="${user.userState}"></td>
+				<td
+					th:text="${#strings.substring(user.createdAt.toString(), 0, 10) + ' ' + #strings.substring(user.createdAt.toString(), 11, 16)}">
+				</td>
+				<td
+					th:text="${#strings.substring(user.updatedAt.toString(), 0, 10) + ' ' + #strings.substring(user.updatedAt.toString(), 11, 16)}">
+				</td>
+
+				<td th:if="${user.userState != 'Deleted'}">
+					<button type="button" class="btn btn-danger btn-sm">삭제</button>
 				</td>
 			</tr>
 		</tbody>

@@ -53,6 +53,7 @@ public class AdminController {
 		return "admin/Admin";
 	}
 
+	// 게시판관리
 	@GetMapping("/admin/adminBoard/{id}")
 	public String getAdminCategory(@PathVariable("id") String categoryName, Model model) {
 		System.out.println("카테고리 요청 진입: " + categoryName);
@@ -84,28 +85,30 @@ public class AdminController {
 
 	}
 
+	// 카테고리관리
 	@GetMapping("/admin/adminCategory")
 	public String getAdminCategory(Model model) {
-		System.out.println("카테고리 요청 진입");
+//		System.out.println("카테고리 요청 진입");
 
 		// 카테고리목록 조회
 		List<BoardCategory> boardCategoryList = boardCategoryService.BoardCategoryList();
-//		System.out.println("게시글 개수: " + filteredBoards.size());
+//		System.out.println("카테고리 개수: " + boardCategoryList);
 
 		// 모델에 데이터 추가
-		model.addAttribute("UserList", boardCategoryList);
+		model.addAttribute("boardCategoryList", boardCategoryList);
 
 		return "fragments/admin/AdminCategory :: AdminCategory"; // 정확한 경로와 프래그먼트 이름
 
 	}
 
+	// 회원관리
 	@GetMapping("/admin/adminUsers")
 	public String getAdminUsers(Model model) {
-		System.out.println("회원목록 요청 진입");
+//		System.out.println("회원목록 요청 진입");
 
 		// 회원명단 조회
 		List<User> userList = userService.getUserList();
-//		System.out.println("게시글 개수: " + filteredBoards.size());
+		System.out.println("회원수: " + userList);
 
 		// 모델에 데이터 추가
 		model.addAttribute("UserList", userList);

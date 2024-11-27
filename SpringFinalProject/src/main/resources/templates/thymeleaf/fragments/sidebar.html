@@ -21,6 +21,9 @@
 				<div th:if="${LoginInfo.loginType == '관리자'}">
 					<a th:href="@{/admin}">관리자</a>
 				</div>
+				<div th:if="${LoginInfo.loginType == '회원'}">
+					<a href="#" onclick=" loadMyPage(event, this)">myPage</a>
+				</div>
 			</div>
 		</div>
 		<div class="boardList p-3">

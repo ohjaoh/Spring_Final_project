@@ -31,7 +31,7 @@ public class LoginController {
 	public String rootPage(HttpSession session, Model model) {
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
 		if (loginInfo != null) {
-			System.out.println("로그인한 사용자 정보가 존재합니다.");
+//			System.out.println("로그인한 사용자 정보가 존재합니다.");
 			model.addAttribute("LoginInfo", loginInfo);
 			// 이거 기반으로 th:if 사용 가능하도록 백엔드만 수정
 		} 

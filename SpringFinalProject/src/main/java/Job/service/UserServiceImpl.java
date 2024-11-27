@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// 회원목록
-	// 커스텀 쿼리를 이용해서 findAll이 아닌 몇가지 정보만 담아서 불러오는 형태로 진행
 	@Override
 	public List<UserLiteInfo> userList() {
 
