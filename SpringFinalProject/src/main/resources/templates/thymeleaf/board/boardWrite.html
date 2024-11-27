@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>인력사무소</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/boardWrite.css}">
 </head>
 
 <body>
@@ -14,35 +14,36 @@
 		<div th:replace="fragments/header :: header"></div>
 
 		<!-- 내용 -->
-		<div class="center d-flex">
+		<div class="boardWrapper">
+			<form action="/board/write" method="post" th:action="@{/board/write}" th:method="post">
+				<!-- 드롭다운 메뉴 -->
+				<div class="form-group">
+					<label for="category">게시판 선택</label>
+					<select class="form-control" id="category" name="category">
+						<option th:each="category : ${boardCategoryList}" th:value="${category}" th:text="${category}">
+							카테고리
+						</option>
+					</select>
+				</div>
 
-			<!-- 드랍박스로 카테고리 선택 -->
-			<div>
-				<label for="category">카테고리 선택:</label>
-				<select id="category" name="category">
-					<option th:each="category : ${boardCategoryList}" th:value="${category}" th:text="${category}">
-						카테고리
-					</option>
-				</select>
-			</div>
+				<!-- 제목 입력 -->
+				<div class="form-group">
+					<label for="title">제목</label>
+					<input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요">
+				</div>
 
-			<!-- 제목 작성 -->
-			<div>
-				<label for="title">제목:</label>
-				<input type="text" id="title" name="title" placeholder="제목을 입력하세요">
-			</div>
+				<!-- 내용 입력 -->
+				<div class="form-group">
+					<label for="content">내용</label>
+					<textarea class="form-control" id="content" name="content" rows="5"
+						placeholder="내용을 입력하세요"></textarea>
+				</div>
 
-
-			<!-- 내용 작성 -->
-			<div>
-				<label for="content">내용:</label>
-				<textarea id="content" name="content" rows="5" placeholder="내용을 입력하세요"></textarea>
-			</div>
-
-			<!-- 작성완료 버튼 -->
-			<div>
-				<button type="button">작성 완료</button>
-			</div>
+				<!-- 작성 완료 버튼 -->
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">작성 완료</button>
+				</div>
+			</form>
 		</div>
 
 		<!-- 푸터 -->

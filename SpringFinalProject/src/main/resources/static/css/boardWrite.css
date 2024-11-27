@@ -1,0 +1,62 @@
+        .header,
+        .center,
+        .footer,
+        .sidebar,
+        .content,
+        .login,
+        .boardList {
+        	border-radius: 2px;
+        }
+
+        .header {
+        	background-color: lightgray;
+        	height: 20vh;
+        }
+
+
+        .footer {
+        	border-top: 2px solid lightgray;
+        	margin-top: 10px;
+        	text-align: center;
+        	padding: 1rem;
+        	bottom: 0;
+        }
+
+        body {
+        	background-color: #f8f9fa;
+        }
+
+        .boardWrapper {
+        	margin: 2vh 0;
+        	background: #ffffff;
+        	border-radius: 8px;
+        	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        	padding: 2vw;
+        }
+
+        label {
+        	font-weight: bold;
+        }
+
+        .center {
+        	flex-wrap: wrap;
+        	justify-content: center;
+        }
+
+        textarea,
+        input[type="text"] {
+        	width: 100%;
+        }
+
+        button {
+        	background-color: #007bff;
+        	color: white;
+        	border: none;
+        	padding: 10px 20px;
+        	border-radius: 5px;
+        	cursor: pointer;
+        }
+
+        button:hover {
+        	background-color: #0056b3;
+        }

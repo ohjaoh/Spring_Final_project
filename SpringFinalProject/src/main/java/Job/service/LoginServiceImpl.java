@@ -75,7 +75,7 @@ public class LoginServiceImpl implements LoginService {
 		User user = userRepo.findByUserId(inputUserId);
 		loginInfo.setLoginId(user.getUserId());
 		loginInfo.setLoginName(user.getUserName());
-		loginInfo.setLoginType("회워");
+		loginInfo.setLoginType("회원");
 
 		return loginInfo;
 	}

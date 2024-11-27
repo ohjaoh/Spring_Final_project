@@ -53,7 +53,7 @@ public class BoardTest {
 //	@Test
 	public void deleteBoardTest() {
 		LoginInfo userInfo = new LoginInfo();
-		userInfo.setLoginName("관리자");
+		userInfo.setLoginId("관리자");
 		Long boardNo = (long) 6;
 		boardServiceImpl.deleteBoard(boardNo, userInfo);
 	}
