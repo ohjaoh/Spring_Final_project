@@ -9,24 +9,20 @@
 </head>
 
 <body>
+		
 	<div class="container">
-		<!-- 헤더 -->
 		<div th:replace="fragments/header :: header"></div>
-
-		<div class="center d-flex">
-			<!-- 사이드 -->
-			<div th:replace="fragments/sidebar :: sidebar"></div>
-
-			<!-- 가운데 -->
-			<div id="content-area">
-				<div th:replace="~{fragments/content :: content}"></div>
-				<!-- 프래그먼트에서 동적 콘텐츠가 로드될 공간 -->
-			</div>
-		</div>
-
-		<!-- 푸터 -->
-		<div th:replace="fragments/footer :: footer"></div>
 	</div>
+
+		<div class="container">
+			<div th:replace="fragments/sidebar :: sidebar"></div>
+				<div id="content-area"  class="center">
+					<div th:replace="~{fragments/content :: content}"></div>
+				</div>
+		</div>
+		<div class="container">
+		<div th:replace="fragments/footer :: footer"></div>
+		</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
