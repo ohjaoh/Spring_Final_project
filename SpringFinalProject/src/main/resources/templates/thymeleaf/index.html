@@ -80,10 +80,50 @@
 					alert('회원정보를 불러오는 중 문제가 발생했습니다.');
 				});
 		}
+		function registerPage(event, element) {
+			event.preventDefault(); // 기본 링크 동작 방지
 
+			fetch(`/registerPage`) // 서버로 AJAX 요청
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.text();
+				})
+				.then(html => {
+					document.getElementById('content-area').innerHTML = html;
+				})
+				.catch(error => {
+					console.error('Error loading :', error);
+					alert('회원가입을 불러오는 중 문제가 발생했습니다.');
+				});
+		}
 		function clickBoardItem() {
 			console.log("게시판 아이템이 클릭됨")
 		}
+
+
+		function idCheck() {
+			const userId = document.getElementById("userId").value;
+			if (!userId) {
+				alert("아이디를 입력하세요.");
+				return;
+			}
+			// console.log(username);
+			fetch(`/idCheck/${userId}`)
+				.then(response => response.json())
+				.then(data => {
+					if (data.isAvailable) {
+						alert("사용 가능한 아이디입니다.");
+					} else {
+						alert("이미 사용 중인 아이디입니다.");
+					}
+				})
+
+				.catch(error => console.error("Error:", error));
+		}
+
+
 	</script>
 
 	<script th:src="@{./js/index.js}"></script>

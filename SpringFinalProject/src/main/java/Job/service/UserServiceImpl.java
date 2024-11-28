@@ -118,4 +118,13 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
+	public boolean idCheck(String userId) {
+		boolean isAvailable;
+		if (userRepo.findByUserId(userId) != null) {
+			isAvailable = false;
+		}
+
+		return true;
+	}
+
 }

@@ -9,7 +9,7 @@
 					<input name="password" type="password" class="form-control mb-1" placeholder="비밀번호" required>
 					<input type="submit" value="로그인" class="btn btn-primary btn-block">
 				</form>
-				<a th:href="@{/registerPage}" class="btn btn-link">회원가입</a>
+				<a href="#" onclick="registerPage(event, this)" class="btn btn-link">회원가입</a>
 			</div>
 			<div th:if="${LoginInfo != null}">
 				<!-- 로그인 후 상태 -->

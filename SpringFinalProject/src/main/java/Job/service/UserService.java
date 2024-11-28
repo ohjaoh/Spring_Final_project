@@ -27,4 +27,7 @@ public interface UserService {
 
 	// 유저목록(관리자)
 	public List<User> getUserList();
+	
+	// id중복체크
+	public boolean idCheck(String userId);
 }
