@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import Job.entity.Board;
 import Job.entity.BoardCategory;
@@ -56,16 +60,25 @@ public class AdminController {
 
 	// 게시판관리
 	@GetMapping("/admin/adminBoard/{id}")
-	public String getAdminCategory(@PathVariable("id") String categoryName, Model model) {
+	public String getAdminCategory(@PathVariable("id") String categoryName, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, Model model) {
+
 		System.out.println("카테고리 요청 진입: " + categoryName);
+
+		Pageable pageable = PageRequest.of(page, size); // 페이지네이션 설정
 
 		if (categoryName.equals("All")) {
 			System.out.println("전체검색");
-			// 게시글 조회
-			List<Board> filteredBoards = boardService.findAll();
+
+			// 전체 게시글 조회 (페이지네이션)
+			Page<Board> filteredBoards = boardService.findAll(pageable);
 
 			// 모델에 데이터 추가
-			model.addAttribute("boardList", filteredBoards);
+			model.addAttribute("boardList", filteredBoards.getContent());
+			model.addAttribute("currentPage", filteredBoards.getNumber());
+			model.addAttribute("totalPages", filteredBoards.getTotalPages());
+			model.addAttribute("totalItems", filteredBoards.getTotalElements());
+
 		} else {
 			// 카테고리 조회
 			BoardCategory category = boardCategoryService.findBoardCategory(categoryName);
@@ -74,16 +87,17 @@ public class AdminController {
 				return "error/404"; // 에러 페이지로 반환
 			}
 
-			// 게시글 조회
-			List<Board> filteredBoards = boardService.boardList(category);
-//		System.out.println("게시글 개수: " + filteredBoards.size());
+			// 카테고리별 게시글 조회 (페이지네이션)
+			Page<Board> filteredBoards = boardService.boardList(category, pageable);
 
 			// 모델에 데이터 추가
-			model.addAttribute("boardList", filteredBoards);
-
+			model.addAttribute("boardList", filteredBoards.getContent());
+			model.addAttribute("currentPage", filteredBoards.getNumber());
+			model.addAttribute("totalPages", filteredBoards.getTotalPages());
+			model.addAttribute("totalItems", filteredBoards.getTotalElements());
 		}
-		return "fragments/admin/adminBoardList :: BoardList"; // 정확한 경로와 프래그먼트 이름
 
+		return "fragments/admin/adminBoardList :: BoardList"; // 정확한 경로와 프래그먼트 이름
 	}
 
 	// 카테고리관리
@@ -120,15 +134,22 @@ public class AdminController {
 
 	// 게시판삭제
 	@GetMapping("/admin/deleteBoard/{boardNo}")
-	public String adminDeleteBoard(@PathVariable("boardNo") Long boardNo, HttpSession session, Model model) {
+	public String adminDeleteBoard(@PathVariable("boardNo") Long boardNo, HttpSession session,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
 
 		System.out.println("진입체크" + boardNo);
 		boardService.deleteBoard(boardNo, loginInfo);
 
-		// 게시글 조회
-		List<Board> filteredBoards = boardService.findAll();
+		Pageable pageable = PageRequest.of(page, size); // 페이지네이션 설정
+		// 전체 게시글 조회 (페이지네이션)
+		Page<Board> filteredBoards = boardService.findAll(pageable);
 
+		// 모델에 데이터 추가
+		model.addAttribute("boardList", filteredBoards.getContent());
+		model.addAttribute("currentPage", filteredBoards.getNumber());
+		model.addAttribute("totalPages", filteredBoards.getTotalPages());
+		model.addAttribute("totalItems", filteredBoards.getTotalElements());
 		// 모델에 데이터 추가
 		model.addAttribute("boardList", filteredBoards);
 		return "fragments/admin/adminBoardList :: BoardList"; // 정확한 경로와 프래그먼트 이름

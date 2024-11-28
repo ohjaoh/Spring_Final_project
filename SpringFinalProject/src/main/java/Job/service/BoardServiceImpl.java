@@ -3,6 +3,8 @@ package Job.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Job.repository.BoardRepository;
@@ -80,20 +82,20 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
-	// 게시판 목록 불러오는 함수
+	// 카테고리별 게시판목록 불러오는 메서드
 	@Override
-	public List<Board> boardList(BoardCategory categoryNum) {
-		String status = "ACTIVE";
+	public Page<Board> boardList(BoardCategory categoryNum, Pageable pageable) {
+	    String status = "ACTIVE";
 
-		// 상태가 활성화된 녀석들만 조회
-		List<Board> boardList = boardRepo.findByBoardStateAndCategory(status, categoryNum);
-		return boardList;
+	    // 상태가 활성화된 카테고리별 게시판 목록 조회 (페이지네이션 포함)
+	    return boardRepo.findByBoardStateAndCategory(status, categoryNum, pageable);
 	}
 
+	// 관리자에서 전체 목록을 불러오는 메서드
 	@Override
-	public List<Board> findAll() {
+	public Page<Board> findAll(Pageable pageable) {
 		// 상태가 활성화된 녀석들만 조회
-		List<Board> boardList = boardRepo.findAll();
+		Page<Board> boardList = boardRepo.findAll(pageable);
 		return boardList;
 	}
 

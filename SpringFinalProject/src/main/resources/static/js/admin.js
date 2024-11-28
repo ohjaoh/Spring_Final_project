@@ -34,6 +34,30 @@ function findAllBoards(event, element) {
 		});
 }
 
+// 페이지게이션
+function loadBoardList(page) {
+	const categoryName = "All";
+	const url = `/admin/adminBoard/${categoryName}?page=${page}&size=10`;
+	fetch(url)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Failed to fetch board list');
+			}
+			return response.text();
+		})
+		.then(html => {
+			document.getElementById('content-area').innerHTML = html;
+		})
+		.catch(error => {
+			console.error('Error loading board list:', error);
+			Swal.fire({
+				icon: 'error',
+				title: '오류',
+				text: '게시판 목록을 불러오는 중 문제가 발생했습니다.'
+			});
+		});
+}
+
 // 카테고리 관리 데이터 로드 함수
 function findAllCategory(event, element) {
 	event.preventDefault(); // 기본 링크 동작 방지

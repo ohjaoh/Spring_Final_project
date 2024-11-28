@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +33,8 @@ public class BoardController {
 	private BoardCategoryService boardCategoryService;
 
 	@GetMapping("/board/category/{id}")
-	public String getBoardByCategory(@PathVariable("id") String categoryName, Model model) {
+	public String getBoardByCategory(@PathVariable("id") String categoryName,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {
 //		System.out.println("카테고리 요청 진입: " + categoryName);
 
 		// 카테고리 조회
@@ -40,11 +44,16 @@ public class BoardController {
 			return "error/404"; // 에러 페이지로 반환
 		}
 
-		// 게시글 조회
-		List<Board> filteredBoards = boardService.boardList(category);
-//		System.out.println("게시글 개수: " + filteredBoards.size());
+		Pageable pageable = PageRequest.of(page, size); // 페이지네이션 설정
+
+		// 카테고리별 게시글 조회 (페이지네이션)
+		Page<Board> filteredBoards = boardService.boardList(category, pageable);
 
 		// 모델에 데이터 추가
+		model.addAttribute("boardList", filteredBoards.getContent());
+		model.addAttribute("currentPage", filteredBoards.getNumber());
+		model.addAttribute("totalPages", filteredBoards.getTotalPages());
+		model.addAttribute("totalItems", filteredBoards.getTotalElements());
 		model.addAttribute("boardList", filteredBoards);
 		return "fragments/BoardList :: BoardList";
 
@@ -171,7 +180,8 @@ public class BoardController {
 	}
 
 	@GetMapping("/board/delete/{boardNo}")
-	public String boardDelete(HttpSession session, @PathVariable("boardNo") Long boardNo, Model model) {
+	public String boardDelete(HttpSession session, @PathVariable("boardNo") Long boardNo,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {
 
 		// 세션에 저장된 로그인정보를 불러온다.
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
@@ -190,12 +200,17 @@ public class BoardController {
 			System.err.println("카테고리를 찾을 수 없습니다: " + categoryName);
 			return "error/404"; // 에러 페이지로 반환
 		}
+		
+		Pageable pageable = PageRequest.of(page, size); // 페이지네이션 설정
 
-		// 게시글 조회
-		List<Board> filteredBoards = boardService.boardList(category);
-//		System.out.println("게시글 개수: " + filteredBoards.size());
+		// 카테고리별 게시글 조회 (페이지네이션)
+		Page<Board> filteredBoards = boardService.boardList(category, pageable);
 
 		// 모델에 데이터 추가
+		model.addAttribute("boardList", filteredBoards.getContent());
+		model.addAttribute("currentPage", filteredBoards.getNumber());
+		model.addAttribute("totalPages", filteredBoards.getTotalPages());
+		model.addAttribute("totalItems", filteredBoards.getTotalElements());
 		model.addAttribute("boardList", filteredBoards);
 		return "fragments/BoardList :: BoardList";
 

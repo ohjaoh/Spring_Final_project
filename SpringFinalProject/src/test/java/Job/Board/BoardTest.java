@@ -1,10 +1,11 @@
 package Job.Board;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import Job.entity.Board;
 import Job.entity.BoardCategory;
@@ -59,12 +60,26 @@ public class BoardTest {
 	}
 
 	// 게시판 목록
-//	@Test
-	public void boardList() {
+	@Test
+	public void boardListWithPagination() {
+		// 카테고리 설정
 		BoardCategory boardCategory = new BoardCategory();
-		boardCategory.setBoardCategoryNo(1);
-		List<Board> boardList = boardServiceImpl.boardList(boardCategory);
-		System.out.println(boardList);
+		boardCategory.setBoardCategoryNo(1); // 테스트용 카테고리 번호
 
+		// 페이지와 사이즈 설정
+		int page = 0; // 첫 번째 페이지
+		int size = 10; // 페이지당 항목 수
+		Pageable pageable = PageRequest.of(page, size);
+
+		// 게시판 목록 조회
+		Page<Board> boardPage = boardServiceImpl.boardList(boardCategory, pageable);
+
+		// 테스트 결과 출력
+		System.out.println("Current Page: " + boardPage.getNumber());
+		System.out.println("Total Pages: " + boardPage.getTotalPages());
+		System.out.println("Total Items: " + boardPage.getTotalElements());
+		System.out.println("Page Size: " + boardPage.getSize());
+		System.out.println("Content: " + boardPage.getContent());
 	}
+
 }

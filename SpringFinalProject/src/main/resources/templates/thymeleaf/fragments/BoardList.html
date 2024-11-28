@@ -26,6 +26,31 @@
 				</tr>
 			</tbody>
 		</table>
+		<div th:if="${boardList.getContent().size() >= 10}">
+			<ul class="pagination">
+				<!-- 이전 버튼 -->
+				<li th:classappend="${currentPage == 0} ? 'disabled'">
+					<a href="#"
+						th:onclick="'loadBoardList(' + (${currentPage > 0 ? currentPage - 1 : 0}) + ');'">&laquo; 이전</a>
+				</li>
+
+				<!-- 페이지 번호 버튼 -->
+				<li th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
+					th:classappend="${currentPage == pageNum} ? 'active'">
+					<a href="#" th:onclick="'loadBoardList(' + ${pageNum} + ');'" th:text="${pageNum + 1}"></a>
+				</li>
+
+				<!-- 다음 버튼 -->
+				<li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+					<a href="#"
+						th:onclick="'loadBoardList(' + (${currentPage + 1 < totalPages ? currentPage + 1 : totalPages - 1}) + ');'">다음
+						&raquo;</a>
+				</li>
+			</ul>
+		</div>
+
+
+
 		<div th:if="${session.LoginInfo}">
 			<a href="/boardWrite">글작성</a>
 		</div>
