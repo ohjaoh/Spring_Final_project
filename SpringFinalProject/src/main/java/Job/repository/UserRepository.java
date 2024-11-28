@@ -13,5 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByUserId(String userId);
 	// 유저목록
 	List<UserLiteInfo> findAllBy();
-	
+	// 비밀번호와 솔트값을 제외한 회원정보 메서드
+	UserLiteInfo findLiteInfoByUserId(String userId);
 }

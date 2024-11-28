@@ -41,18 +41,10 @@ public class BoardController {
 		// 게시글 조회
 		List<Board> filteredBoards = boardService.boardList(category);
 //		System.out.println("게시글 개수: " + filteredBoards.size());
-		System.out.println(filteredBoards);
-
-		for (int i = 1; i <= filteredBoards.size(); i++) {
-			Board board = filteredBoards.get(i - 1);
-			board.setBoardNo(Long.valueOf(i));
-
-			filteredBoards.set(i - 1, board);
-		}
 
 		// 모델에 데이터 추가
 		model.addAttribute("boardList", filteredBoards);
-		return "fragments/BoardList :: BoardList"; // 정확한 경로와 프래그먼트 이름
+		return "fragments/BoardList :: BoardList";
 
 	}
 
@@ -81,22 +73,42 @@ public class BoardController {
 
 	// 게시판 작성페이지
 	@PostMapping("/board/write")
-	public String writeBoard(HttpSession session, 
-			@RequestParam String category, @RequestParam String title, @RequestParam String content) {
+	public String writeBoard(HttpSession session, @RequestParam String category, @RequestParam String title,
+			@RequestParam String content) {
 
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
-		
+
 		BoardCategory boardCategory = boardCategoryService.findBoardCategory(category);
-		
+
 		Board board = new Board();
 		board.setBoardTitle(title);
 		board.setCategory(boardCategory);
 		board.setBoardContent(content);
-		
+
 		boardService.insertBoard(board, category, loginInfo);
-		
-		
+
 		// 데이터 처리 로직
 		return "redirect:/";
 	}
+
+	// 게시글 조회페이지
+	@GetMapping("/boardPage/{boardNo}")
+	public String boardPage(HttpSession session, @PathVariable("boardNo") Long boardNo, Model model) {
+
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
+//		System.out.println("진입체크" + boardNo);
+		Board board = boardService.boardPage(boardNo);
+		if (loginInfo != null) {
+			System.out.println("1차 조건문 충족" + loginInfo.getLoginId() + "게시판" + board.getWriterId());
+			if (loginInfo.getLoginId().equals(board.getWriterId())) {
+				System.out.println("2차 조건문 충족");
+			}
+		}
+
+//		System.out.println("에러체크" + board);
+		model.addAttribute("board", board);
+		model.addAttribute("LoginInfo", loginInfo);
+		return "fragments/boardPage :: boardPage";
+	}
+
 }

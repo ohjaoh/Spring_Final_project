@@ -22,12 +22,9 @@ public interface UserService {
 	// 회원탈퇴, 회원삭제
 	public void userDelete(String userId);
 
-	// 유저정보
+	// 유저정보 (관리자)
 	public User getUser(String userId);
 
-	// 유저목록(관리자)
-	public List<User> getUserList();
-	
 	// id중복체크
 	public boolean idCheck(String userId);
 }

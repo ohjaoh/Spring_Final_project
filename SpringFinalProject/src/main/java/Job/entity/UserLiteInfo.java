@@ -4,17 +4,20 @@ import java.time.LocalDateTime;
 
 public interface UserLiteInfo {
 
-    String getUserId();
+	String getUserNo();
 
-    String getUserName();
+	String getUserId();
 
-    String getUserEmail();
+	String getUserName();
 
-    Integer getUserAge();
+	String getUserEmail();
 
-    LocalDateTime getCreatedAt();
+	String getUserState();
 
-    LocalDateTime getUpdatedAt();
-    
-    
+	Integer getUserAge();
+
+	LocalDateTime getCreatedAt();
+
+	LocalDateTime getUpdatedAt();
+
 }

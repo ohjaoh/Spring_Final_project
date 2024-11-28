@@ -1,4 +1,31 @@
-<div th:fragment="BoardPage" class="content">
-	<h1>게시판 페이지</h1>
-
+<div th:fragment="boardPage" class="content container mt-5">
+	<div class="card shadow-sm">
+		<div class="card-header bg-primary text-white">
+			<h1 th:text="${board.boardTitle}" class="mb-0"></h1>
+		</div>
+		<div class="card-body">
+			<p class="text-muted mb-3">
+				작성자: <strong th:text="${board.writerId}"></strong> |
+				작성일: <span th:text="${#dates.format(board.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
+			</p>
+			<hr>
+			<div>
+				<h5 class="text-secondary">게시판 내용</h5>
+				<p th:text="${board.boardContent}" class="text-dark"></p>
+			</div>
+			<hr>
+			<div>
+				<h5 class="text-secondary">카테고리</h5>
+				<p th:text="${board.category.categoryName}" class="text-info"></p>
+			</div>
+		</div>
+		<div class="card-footer text-end">
+			<div th:if="${LoginInfo != null and LoginInfo.loginId eq board.writerId}" class="btn-group">
+				<a href="#" class="btn btn-warning">수정</a>
+				<!-- /board/edit/${board.boardNo} 이용 onclick를 이용-->
+				<a href="#" class="btn btn-danger">삭제</a>
+				<!-- /board/delete/${board.boardNo} 이용 onclick를 이용-->
+			</div>
+		</div>
+	</div>
 </div>

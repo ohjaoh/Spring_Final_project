@@ -13,6 +13,7 @@ import Job.entity.Board;
 import Job.entity.BoardCategory;
 import Job.entity.LoginInfo;
 import Job.entity.User;
+import Job.entity.UserLiteInfo;
 import Job.service.AdminService;
 import Job.service.BoardCategoryService;
 import Job.service.BoardService;
@@ -101,13 +102,13 @@ public class AdminController {
 
 	}
 
-	// 회원관리
+	// 회원목록
 	@GetMapping("/admin/adminUsers")
 	public String getAdminUsers(Model model) {
 //		System.out.println("회원목록 요청 진입");
 
 		// 회원명단 조회
-		List<User> userList = userService.getUserList();
+		List<UserLiteInfo> userList = userService.userList();
 		System.out.println("회원수: " + userList);
 
 		// 모델에 데이터 추가
@@ -117,4 +118,20 @@ public class AdminController {
 
 	}
 
+	// 게시판삭제
+	@GetMapping("/admin/deleteBoard/{boardNo}")
+	public String adminDeleteBoard(@PathVariable("boardNo") Long boardNo, HttpSession session, Model model) {
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
+
+		System.out.println("진입체크" + boardNo);
+		boardService.deleteBoard(boardNo, loginInfo);
+
+		// 게시글 조회
+		List<Board> filteredBoards = boardService.findAll();
+
+		// 모델에 데이터 추가
+		model.addAttribute("boardList", filteredBoards);
+		return "fragments/admin/adminBoardList :: BoardList"; // 정확한 경로와 프래그먼트 이름
+
+	}
 }

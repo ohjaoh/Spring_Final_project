@@ -81,11 +81,15 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		// 로그인 정보를 기반으로 user 객체를 찾아오기
 		String userId = loginInfo.getLoginId();
-		userRepo.findByUserId(userId);
+		user = userRepo.findByUserId(userId);
 
+		if (user != null) {
+			user.setUserPassword(null); // 민감한 정보 제거
+			user.setUserSalt(null);
+		}
 		// 민감한 정보는 null로 초기화 후 사용
-		user.setUserPassword("");
-		user.setUserSalt("");
+//		user.setUserPassword("");
+//		user.setUserSalt("");
 
 		return user;
 	}
@@ -106,22 +110,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUser(String userId) {
 		User user = new User();
+		if (user != null) {
+			user.setUserPassword(null); // 민감한 정보 제거
+			user.setUserSalt(null);
+		}
 		user = userRepo.findByUserId(userId);
 		return user;
 
 	}
 
-	// 회원목록(관리자)
+	// Id 중복체크
 	@Override
-	public List<User> getUserList() {
-		List<User> userList = userRepo.findAll();
-		return userList;
-	}
-
 	public boolean idCheck(String userId) {
-		boolean isAvailable;
 		if (userRepo.findByUserId(userId) != null) {
-			isAvailable = false;
+			return false;
 		}
 
 		return true;
