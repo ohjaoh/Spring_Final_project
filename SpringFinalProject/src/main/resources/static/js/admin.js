@@ -92,7 +92,7 @@ function toggleCreateCategoryFormBtn() {
 // 게시글 삭제
 function deleteBoard(event) {
 
-	// data-board-no 속성 값 가져오기
+	// boardNo 속성 값 가져오기
 	const boardNo = event.currentTarget.getAttribute('boardNo');
 
 	fetch(`/admin/deleteBoard/${boardNo}`)

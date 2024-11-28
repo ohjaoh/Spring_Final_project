@@ -22,7 +22,7 @@ public class BoardTest {
 	public void insertBoardTest() {
 		LoginInfo userInfo = new LoginInfo();
 		userInfo.setLoginId("관리자");
-		String boardCategory = "구직";
+		String boardCategory = "자유";
 
 		for (int i = 0; i < 5; i++) {
 			Board board = new Board();

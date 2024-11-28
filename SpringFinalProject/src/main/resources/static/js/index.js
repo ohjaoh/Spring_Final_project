@@ -63,15 +63,8 @@ function moveFragment(fragmentUrl) {
 		})
 		.catch(error => console.error('Error loading fragment:', error));
 }
-function moveFragment(fragmentUrl) {
-	fetch(fragmentUrl)
-		.then(response => response.text())
-		.then(html => {
-			document.getElementById('fragment-container').innerHTML = html;
-		})
-		.catch(error => console.error('Error loading fragment:', error));
-}
 
+// 카테고리별 게시판가져오는 함수
 function loadCategory(event, element) {
 	event.preventDefault(); // 기본 링크 동작 방지
 
@@ -98,6 +91,7 @@ function loadCategory(event, element) {
 		});
 }
 
+// 마이페이지 불러오는 함수
 function loadMyPage(event, element) {
 	event.preventDefault(); // 기본 링크 동작 방지
 
@@ -121,6 +115,7 @@ function loadMyPage(event, element) {
 		});
 }
 
+// 회원가입페이지 불러오는 함수
 function registerPage(event, element) {
 	event.preventDefault(); // 기본 링크 동작 방지
 
@@ -144,12 +139,13 @@ function registerPage(event, element) {
 		});
 }
 
+// 클릭된 게시글 진입하는 함수
 function clickBoardItem(event) {
 	// 클릭된 행 요소 가져오기
 	const clickedRow = event.currentTarget;
 
-	// data-board-no 속성 값 가져오기
-	const boardNo = clickedRow.getAttribute('data-board-no');
+	// boardNo 속성 값 가져오기
+	const boardNo = clickedRow.getAttribute('boardNo');
 
 	// 확인용 출력 (콘솔에 출력)
 	// console.log(`게시판 번호: ${boardNo}`);
@@ -175,6 +171,7 @@ function clickBoardItem(event) {
 		});
 }
 
+// id 중복체크하는 함수
 function idCheck() {
 	const userId = document.getElementById("userId").value;
 	if (!userId) {
@@ -209,6 +206,94 @@ function idCheck() {
 				icon: 'error',
 				title: '오류',
 				text: '아이디 확인 중 문제가 발생했습니다.'
+			});
+		});
+}
+
+// 게시글 수정페이지 진입
+function editBoard(event) {
+	const boardNo = event.currentTarget.getAttribute('boardNo');
+	console.log(boardNo);
+
+	fetch(`/boardUpdate/${boardNo}`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.text();
+		})
+		.then(html => {
+			document.getElementById('content-area').innerHTML = html;
+		})
+		.catch(error => {
+			console.error('Error loading :', error);
+			Swal.fire({
+				icon: 'error',
+				title: '오류',
+				text: '게시판 페이지를 불러오는 중 문제가 발생했습니다.'
+			});
+		});
+}
+
+function updateBoard(event) {
+	const boardNo = event.currentTarget.getAttribute('boardNo');
+	const boardTitle = document.getElementById("boardTitle").value;
+	const category = document.getElementById("category").value;
+	const boardContent = document.getElementById("boardContent").value;
+
+	// 데이터 객체 생성
+	const requestData = {
+		boardNo: boardNo,
+		boardTitle: boardTitle,
+		category: category,
+		boardContent: boardContent
+	};
+
+	console.log(requestData);
+	fetch(`/board/update/${boardNo}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json', // JSON 데이터 전송
+		},
+		body: JSON.stringify(requestData) // 데이터를 JSON 문자열로 변환
+	})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.text();
+		})
+		.then(html => {
+			document.getElementById('content-area').innerHTML = html;
+		})
+		.catch(error => {
+			console.error('Error loading :', error);
+			Swal.fire({
+				icon: 'error',
+				title: '오류',
+				text: '게시판 페이지를 불러오는 중 문제가 발생했습니다.'
+			});
+		});
+
+}
+function deleteBoard() {
+	const boardNo = event.currentTarget.getAttribute('boardNo');
+	fetch(`/board/delete/${boardNo}`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.text();
+		})
+		.then(html => {
+			document.getElementById('content-area').innerHTML = html;
+		})
+		.catch(error => {
+			console.error('Error loading :', error);
+			Swal.fire({
+				icon: 'error',
+				title: '오류',
+				text: '게시판 페이지를 불러오는 중 문제가 발생했습니다.'
 			});
 		});
 }

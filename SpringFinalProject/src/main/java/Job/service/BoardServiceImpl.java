@@ -47,10 +47,8 @@ public class BoardServiceImpl implements BoardService {
 	// 수정할 데이터를 게시판객체로 받아서
 	@Override
 	public void updateBoard(Board board, LoginInfo loginInfo) {
-		// 로그인한 사람의 게시글만 수정가능
-		if (loginInfo.getLoginId().equals(board.getWriterId())) {
-			boardRepo.save(board);
-		}
+		board.setWriterId(loginInfo.getLoginId());
+		boardRepo.save(board);
 
 	}
 

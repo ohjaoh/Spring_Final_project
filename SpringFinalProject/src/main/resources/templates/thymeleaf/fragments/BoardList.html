@@ -16,7 +16,7 @@
 				</tr>
 			</thead>
 			<tbody class="table-group-divider">
-				<tr th:each="board, iterStat : ${boardList}" th:attr="data-board-no=${board.boardNo}"
+				<tr th:each="board, iterStat : ${boardList}" th:attr="boardNo=${board.boardNo}"
 					onclick="clickBoardItem(event)" class="table-row">
 					<td th:text="${iterStat.index+1}"></td>
 					<td th:text="${board.boardTitle}"></td>
