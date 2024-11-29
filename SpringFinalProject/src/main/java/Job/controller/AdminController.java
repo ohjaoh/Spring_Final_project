@@ -43,15 +43,11 @@ public class AdminController {
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
 		if (loginInfo == null) {
 			System.out.println("로그인한 사용자 정보가 없습니다.");
-			// 세션값이 없으면 루트페이지로 리다이렉트
 			return "redirect:/";
 		}
 
-		// 카테고리항목을 받아와서 그 중 이름만 추출하여 모델에 추가
 		List<BoardCategory> boardCategoryList = boardCategoryService.BoardCategoryList();
 		List<String> boardCategoryNameList = new ArrayList<>();
-
-		// boardCategoryList에서 boardCategoryName만 추출하는 반복문
 		for (BoardCategory boardCategory : boardCategoryList) {
 			boardCategoryNameList.add(boardCategory.getCategoryName());
 		}
@@ -180,7 +176,6 @@ public class AdminController {
 		return "fragments/admin/AdminCategory :: AdminCategory"; // 정확한 경로와 프래그먼트 이름
 	}
 
-
 	@GetMapping("/admin/deleteCategory/{categoryNo}")
 	public String adminDeleteCategory(@PathVariable int categoryNo, HttpSession session, Model model) {
 
@@ -197,4 +192,30 @@ public class AdminController {
 
 		return "fragments/admin/AdminCategory :: AdminCategory"; // 정확한 경로와 프래그먼트 이름
 	}
+
+	// 새로운 카테고리 생성 후 관리자 페이지로 이동
+	@PostMapping("/admin/createCategory")
+	public String adminCreateCategory(HttpSession session, @RequestParam String categoryName, Model model) {
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
+		System.out.println("카테고리 생성 요청 진입");
+
+		if (loginInfo == null) {
+			System.out.println("로그인한 사용자 정보가 없습니다.");
+			return "redirect:/";
+		}
+
+		List<BoardCategory> boardCategoryList = boardCategoryService.BoardCategoryList();
+		List<String> boardCategoryNameList = new ArrayList<>();
+
+		for (BoardCategory boardCategory : boardCategoryList) {
+			boardCategoryNameList.add(boardCategory.getCategoryName());
+		}
+
+		boardCategoryService.insertBoardCategory(categoryName, loginInfo);
+
+		model.addAttribute("LoginInfo", loginInfo);
+		model.addAttribute("boardCategoryList", boardCategoryNameList);
+		return "redirect:/admin";
+	}
+
 }

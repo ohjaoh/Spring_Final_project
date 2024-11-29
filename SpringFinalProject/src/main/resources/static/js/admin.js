@@ -195,6 +195,8 @@ function submitEditCategory(categoryIdField, categoryNameField) {
 		});
 
 }
+
+// 카테고리 삭제 함수
 function deleteCategory(boardCategory) {
 	console.log(boardCategory)
 	const categoryNo = boardCategory;
