@@ -1,5 +1,5 @@
 <div th:fragment="sidebar">
-	<div class="sidebar">
+	<div class="sidebar text_normal">
 		<div class="login">
 			<!-- 로그인 상태 확인 -->
 			<div th:if="${LoginInfo == null}">
@@ -12,7 +12,6 @@
 				<a th:href="@{/registerPage}" class="btn btn-link">회원가입</a>
 			</div>
 			<div th:if="${LoginInfo != null}">
-				<!-- 로그인 후 상태 -->
 				<p class="mb-2">안녕하세요, <strong th:text="${LoginInfo.loginName}"></strong> 님!</p>
 				<p><strong th:text="${LoginInfo.loginType}"></strong>이십니다.</p>
 				<form id="logoutForm" method="post" th:action="@{/logout}">
@@ -20,15 +19,15 @@
 				</form>
 			</div>
 		</div>
-		<div class="boardList p-3"> <a href="#" onclick="findAllBoards(event, this)"
+		<div class="boardList p-3 text_large"> <a href="#" onclick="findAllBoards(event, this)"
 				style="text-decoration: none; color: inherit;">
-				<h5>게시판관리</h5>
+				<p style="color: green;">게시판관리</p>
 			</a>
 			<a href="#" onclick="findAllCategory(event, this)" style="text-decoration: none; color: inherit;">
-				<h5>카테고리관리</h5>
+				<p style="color: green;">카테고리관리</p>
 			</a>
 			<a href="#" onclick="findAllUsers(event, this)" style="text-decoration: none; color: inherit;">
-				<h5>회원관리</h5>
+				<p style="color: green;">회원관리</p>
 			</a>
 
 		</div>
