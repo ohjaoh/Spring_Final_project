@@ -14,10 +14,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="board : ${boardList}">
+			<tr th:each="board : ${boardList}" th:attr="boardNo=${board.boardNo}" onclick="clickBoardItem(event)"
+				class="table-row">
 				<td th:text="${board.boardNo}"></td>
 				<td th:text="${board.boardTitle}"></td>
-				<td th:text="${board.boardContent}"></td>
+				<td class="text-truncate" style="max-width: 300px;" th:text="${board.boardContent}"></td>
 				<td th:text="${board.writerId}"></td>
 				<td th:text="${#dates.format(board.writeDate, 'yyyy-MM-dd HH:mm')}"></td>
 				<td th:text="${board.boardState}"></td>
@@ -31,13 +32,15 @@
 
 	</table>
 
-	<ul class="pagination container" >
+	<ul class="pagination container">
 		<li style="margin-right: 5px;" th:classappend="${currentPage == 0} ? 'disabled'">
-			<a style="color: green;" href="#" th:onclick="'loadBoardList(' + (${currentPage > 0 ? currentPage - 1 : 0}) + ');'">&laquo; 이전</a>
+			<a style="color: green;" href="#"
+				th:onclick="'loadBoardList(' + (${currentPage > 0 ? currentPage - 1 : 0}) + ');'">&laquo; 이전</a>
 		</li>
 		<li style="margin-right: 5px; margin-left: 5px;" th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
 			th:classappend="${currentPage == pageNum} ? 'active'">
-			<a style="color: green;" href="#" th:onclick="'loadBoardList(' + ${pageNum} + ');'" th:text="${pageNum + 1}"></a>
+			<a style="color: green;" href="#" th:onclick="'loadBoardList(' + ${pageNum} + ');'"
+				th:text="${pageNum + 1}"></a>
 		</li>
 		<li style="margin-left: 5px;" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
 			<a style="color: green;" href="#"
