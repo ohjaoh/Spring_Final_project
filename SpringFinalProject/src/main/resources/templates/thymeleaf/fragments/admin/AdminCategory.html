@@ -1,6 +1,6 @@
-<div th:fragment="AdminCategory" class="content">
-	<h1>카테고리 리스트</h1>
-	<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+<div th:fragment="AdminCategory" class="content text_normal">
+	<p class="border_title">카테고리 리스트</p>
+	<table class="table table-border table-sm" style="text-align: center;">
 
 		<thead>
 			<tr>
@@ -12,13 +12,13 @@
 			<tr th:each="boardCategory : ${boardCategoryList}">
 				<td th:text="${boardCategory.categoryName}">카테고리 이름</td>
 				<td>
-					<button
+					<button class="btnsmall"
 						th:attr="categoryNo=${boardCategory.boardCategoryNo}, categoryName=${boardCategory.categoryName}"
 						onclick="openEditModal(this.getAttribute('categoryNo'), this.getAttribute('categoryName'))">
 						수정
 					</button>
 
-					<button th:attr="categoryNo=${boardCategory.boardCategoryNo}"
+					<button class="btn_red" th:attr="categoryNo=${boardCategory.boardCategoryNo}"
 						onclick="deleteCategory(this.getAttribute('categoryNo'))">삭제</button>
 				</td>
 			</tr>

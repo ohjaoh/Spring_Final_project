@@ -1,28 +1,28 @@
-<div th:fragment="boardPage" class="content container mt-5">
-	<div class="card shadow-sm">
-		<div class="card-header bg-primary text-white">
-			<h1 th:text="${board.boardTitle}" class="mb-0"></h1>
+<div th:fragment="boardPage" class="content">
+	<div class="card shadow">
+		<div class="card-header border_title">
+			<p th:text="${board.boardTitle}" class="mb-0"></p>
 		</div>
-		<div class="card-body">
+		<div class="card-body text_normal">
 			<p class="text-muted mb-3">
 				작성자: <strong th:text="${board.writerId}"></strong> |
 				작성일: <span th:text="${#dates.format(board.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
 			</p>
 			<hr>
 			<div>
-				<h5 class="text-secondary">게시판 내용</h5>
+				<h5 class="text_large">게시판 내용</h5>
 				<p th:text="${board.boardContent}" class="text-dark"></p>
 			</div>
 			<hr>
 			<div>
-				<h5 class="text-secondary">카테고리</h5>
+				<h5 class="text_large">카테고리</h5>
 				<p th:text="${board.category.categoryName}" class="text-info"></p>
 			</div>
 		</div>
 		<div class="card-footer text-end">
 			<div th:if="${LoginInfo != null and LoginInfo.loginId eq board.writerId}" class="btn-group">
-				<a href="#" class="btn btn-warning" th:attr="boardNo=${board.boardNo}" onclick="editBoard(event)">수정</a>
-				<a href="#" class="btn btn-danger"th:attr="boardNo=${board.boardNo}" onclick="deleteBoard(event)">삭제</a>
+			    <button type="button" class="btn_red" th:attr="boardNo=${board.boardNo}" onclick="editBoard(event)">수정</button>
+			    <button type="button" class="btnsmall" th:attr="boardNo=${board.boardNo}" onclick="deleteBoard(event)">삭제</button>
 			</div>
 		</div>
 	</div>

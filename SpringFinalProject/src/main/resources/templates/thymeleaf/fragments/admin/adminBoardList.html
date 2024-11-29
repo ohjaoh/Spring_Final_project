@@ -1,9 +1,9 @@
-<div th:fragment="BoardList" class="content">
-	<h1>게시판 리스트</h1>
-	<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+<div th:fragment="BoardList" class="content text_normal">
+	<p class="border_title">게시판 리스트</p>
+	<table class="table table-border table-sm " style="text-align: center;">
 		<thead>
 			<tr>
-				<th>게시판 번호</th>
+				<th>번호</th>
 				<th>제목</th>
 				<th>내용</th>
 				<th>작성자</th>
@@ -23,7 +23,7 @@
 				<td th:text="${board.boardState}"></td>
 				<td th:text="${board.category?.categoryName}"></td>
 				<td th:if="${board.boardState != 'Deleted'}">
-					<button type="button" class="btn btn-danger btn-sm" th:attr="boardNo=${board.boardNo}"
+					<button type="button" class="btnsmall" th:attr="boardNo=${board.boardNo}"
 						onclick="deleteBoard(event)">삭제</button>
 				</td>
 			</tr>
@@ -31,25 +31,18 @@
 
 	</table>
 
-	<ul class="pagination">
-		<!-- 이전 버튼 -->
-		<li th:classappend="${currentPage == 0} ? 'disabled'">
-			<a href="#" th:onclick="'loadBoardList(' + (${currentPage > 0 ? currentPage - 1 : 0}) + ');'">&laquo; 이전</a>
+	<ul class="pagination container" >
+		<li style="margin-right: 5px;" th:classappend="${currentPage == 0} ? 'disabled'">
+			<a style="color: green;" href="#" th:onclick="'loadBoardList(' + (${currentPage > 0 ? currentPage - 1 : 0}) + ');'">&laquo; 이전</a>
 		</li>
-
-		<!-- 페이지 번호 버튼 -->
-		<li th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
+		<li style="margin-right: 5px; margin-left: 5px;" th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
 			th:classappend="${currentPage == pageNum} ? 'active'">
-			<a href="#" th:onclick="'loadBoardList(' + ${pageNum} + ');'" th:text="${pageNum + 1}"></a>
+			<a style="color: green;" href="#" th:onclick="'loadBoardList(' + ${pageNum} + ');'" th:text="${pageNum + 1}"></a>
 		</li>
-
-		<!-- 다음 버튼 -->
-		<li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
-			<a href="#"
+		<li style="margin-left: 5px;" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+			<a style="color: green;" href="#"
 				th:onclick="'loadBoardList(' + (${currentPage + 1 < totalPages ? currentPage + 1 : totalPages - 1}) + ');'">다음
 				&raquo;</a>
 		</li>
 	</ul>
-
-
 </div>

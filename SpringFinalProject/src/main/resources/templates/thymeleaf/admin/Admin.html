@@ -3,35 +3,31 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>인력사무소</title>
+	<title>4구구</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
+
+	<script th:src="@{./js/index.js}"></script>
 	<div class="container">
-		<!-- 헤더 -->
-		<div th:replace="fragments/header :: header"></div>
-
-		<div class="center d-flex">
-			<!-- 사이드 -->
-			<div th:replace="fragments/admin/adminSidebar :: sidebar"></div>
-
-			<!-- 가운데 -->
-			<div id="content-area">
-				<div th:replace="~{fragments/admin/adminContent :: content}"></div>
-				<!-- 프래그먼트에서 동적 콘텐츠가 로드될 공간 -->
-			</div>
-		</div>
-
-		<!-- 푸터 -->
-		<div th:replace="fragments/footer :: footer" onclick="boardTagManagement('/AdminBoardCategoryManagement')">
-		</div>
+		<div class="header" th:replace="fragments/header :: header"></div>
 	</div>
 
-	<!-- 공통으로 사용되는 외부 스크립트 모아둔 프래그먼트 -->
+	<div th:replace="fragments/Scripts :: scripts"></div>
+	<div class="container">
+		<div class="sidebar" th:replace="fragments/admin/adminSidebar :: sidebar"></div>
+		<div id="content-area" class="center">
+			<div th:replace="~{fragments/admin/adminContent :: content}"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div th:replace="fragments/footer :: footer" onclick="boardTagManagement('/AdminBoardCategoryManagement')"></div>
+	</div>
+
 	<div th:replace = "fragments/Scripts :: scripts"></div>
-	
+		
 	<script th:src="@{./js/admin.js}"></script>
 
 </body>
