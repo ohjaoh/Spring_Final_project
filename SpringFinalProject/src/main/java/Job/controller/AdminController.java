@@ -2,6 +2,7 @@ package Job.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import Job.entity.Board;
@@ -107,7 +110,7 @@ public class AdminController {
 
 		// 카테고리목록 조회
 		List<BoardCategory> boardCategoryList = boardCategoryService.BoardCategoryList();
-//		System.out.println("카테고리 개수: " + boardCategoryList);
+		System.out.println("카테고리 개수: " + boardCategoryList);
 
 		// 모델에 데이터 추가
 		model.addAttribute("boardCategoryList", boardCategoryList);
@@ -154,5 +157,44 @@ public class AdminController {
 		model.addAttribute("boardList", filteredBoards);
 		return "fragments/admin/adminBoardList :: BoardList"; // 정확한 경로와 프래그먼트 이름
 
+	}
+
+	@PostMapping("/admin/editCategory")
+	public String adminEditCategory(@RequestBody Map<String, String> requestData, HttpSession session, Model model) {
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
+
+		int categoryNo = Integer.parseInt(requestData.get("categoryId"));
+		String categoryName = requestData.get("categoryName");
+
+		System.out.println("카테고리 수정 요청 진입" + categoryNo + "이름:" + categoryName);
+
+		boardCategoryService.updateBoardCategory(categoryNo, categoryName, loginInfo);
+
+		// 카테고리목록 조회
+		List<BoardCategory> boardCategoryList = boardCategoryService.BoardCategoryList();
+//		System.out.println("카테고리 개수: " + boardCategoryList);
+
+		// 모델에 데이터 추가
+		model.addAttribute("boardCategoryList", boardCategoryList);
+
+		return "fragments/admin/AdminCategory :: AdminCategory"; // 정확한 경로와 프래그먼트 이름
+	}
+
+
+	@GetMapping("/admin/deleteCategory/{categoryNo}")
+	public String adminDeleteCategory(@PathVariable int categoryNo, HttpSession session, Model model) {
+
+		System.out.println("카테고리 삭제 요청 진입" + categoryNo);
+
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
+		boardCategoryService.deleteBoardCategory(categoryNo, loginInfo);
+
+		// 카테고리목록 조회
+		List<BoardCategory> boardCategoryList = boardCategoryService.BoardCategoryList();
+
+		// 모델에 데이터 추가
+		model.addAttribute("boardCategoryList", boardCategoryList);
+
+		return "fragments/admin/AdminCategory :: AdminCategory"; // 정확한 경로와 프래그먼트 이름
 	}
 }

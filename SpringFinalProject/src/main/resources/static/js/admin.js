@@ -134,7 +134,86 @@ function deleteBoard(event) {
 			Swal.fire({
 				icon: 'error',
 				title: '오류',
-				text: '게시판 페이지를 불러오는 중 문제가 발생했습니다.'
+				text: '게시판을 불러오는 중 문제가 발생했습니다.'
+			});
+		});
+
+}
+// 카테고리수정 모달창
+function openEditModal(categoryId, categoryName) {
+	// 카테고리 정보를 모달창에 설정
+	document.getElementById('categoryId').value = categoryId;
+	document.getElementById('categoryName').value = categoryName;
+
+	// 모달창 표시
+	const modal = document.getElementById('editCategoryModal');
+	modal.style.display = 'block';
+}
+
+// 모달창 제거
+function closeModal() {
+	// 모달창 숨기기
+	const modal = document.getElementById('editCategoryModal');
+	modal.style.display = 'none';
+}
+
+// 수정된 카테고리를 Ajax 요청으로 보내는 함수
+function submitEditCategory(categoryIdField, categoryNameField) {
+	const categoryId = categoryIdField.value;
+	const categoryName = categoryNameField.value;
+	const categoryData = {
+		categoryId: categoryId,
+		categoryName: categoryName
+	};
+
+	console.log(categoryData)
+
+
+	fetch(`/admin/editCategory`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json', // JSON 데이터 전송
+		},
+		body: JSON.stringify(categoryData)
+	})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.text();
+		})
+		.then(html => {
+			document.getElementById('content-area').innerHTML = html; // content-area 업데이트
+		})
+		.catch(error => {
+			console.error('Error loading :', error);
+			Swal.fire({
+				icon: 'error',
+				title: '오류',
+				text: '카테고리를 불러오는 중 문제가 발생했습니다.'
+			});
+		});
+
+}
+function deleteCategory(boardCategory) {
+	console.log(boardCategory)
+	const categoryNo = boardCategory;
+	fetch(`/admin/deleteCategory/${categoryNo}`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok')
+			}
+			return response.text();
+		})
+		.then(html => {
+			document.getElementById('content-area').innerHTML = html; //content-area 업데이
+		})
+		.catch(error => {
+			console.error('Error loading :', error);
+			Swal.fire({
+				icon: 'error',
+				title: '오류',
+				text: '카테고리를 불러오는 중 문제가 발생했습니다.'
 			});
 		});
 
