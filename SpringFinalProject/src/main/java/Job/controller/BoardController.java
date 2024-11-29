@@ -162,9 +162,8 @@ public class BoardController {
 		// 카테고리객체에 맞게 이름을 기준으로 찾아서 가져온다.
 		BoardCategory boardCategory = boardCategoryService.findBoardCategory(category);
 
-		Board board = new Board();
+		Board board =boardService.boardPage(boardNo);
 
-		board.setBoardNo(boardNo);
 		board.setBoardTitle(boardTitle);
 		board.setBoardContent(boardContent);
 		board.setCategory(boardCategory);

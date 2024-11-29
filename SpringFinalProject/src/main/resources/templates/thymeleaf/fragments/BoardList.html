@@ -26,21 +26,23 @@
 				</tr>
 			</tbody>
 		</table>
-		
-		<ul class="pagination container" >
-				<li style="margin-right: 5px;" th:classappend="${currentPage == 0} ? 'disabled'">
-					<a style="color: green;" href="#" th:onclick="'loadBoardList(' + (${currentPage > 0 ? currentPage - 1 : 0}) + ');'">&laquo; 이전</a>
-				</li>
-				<li style="margin-right: 5px; margin-left: 5px;" th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
-					th:classappend="${currentPage == pageNum} ? 'active'">
-					<a style="color: green;" href="#" th:onclick="'loadBoardList(' + ${pageNum} + ');'" th:text="${pageNum + 1}"></a>
-				</li>
-				<li style="margin-left: 5px;" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
-					<a style="color: green;" href="#"
-						th:onclick="'loadBoardList(' + (${currentPage + 1 < totalPages ? currentPage + 1 : totalPages - 1}) + ');'">다음
-						&raquo;</a>
-				</li>
-			</ul>
+
+		<ul th:if="${boardList.getContent().size() >= 10}"  class="pagination container">
+			<li style="margin-right: 5px;" th:classappend="${currentPage == 0} ? 'disabled'">
+				<a style="color: green;" href="#"
+					th:onclick="'loadBoardList(' + (${currentPage > 0 ? currentPage - 1 : 0}) + ');'">&laquo; 이전</a>
+			</li>
+			<li style="margin-right: 5px; margin-left: 5px;" th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
+				th:classappend="${currentPage == pageNum} ? 'active'">
+				<a style="color: green;" href="#" th:onclick="'loadBoardList(' + ${pageNum} + ');'"
+					th:text="${pageNum + 1}"></a>
+			</li>
+			<li style="margin-left: 5px;" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+				<a style="color: green;" href="#"
+					th:onclick="'loadBoardList(' + (${currentPage + 1 < totalPages ? currentPage + 1 : totalPages - 1}) + ');'">다음
+					&raquo;</a>
+			</li>
+		</ul>
 	</div>
 	<div th:if="${session.LoginInfo}">
 		<button class="btnsmall" onclick="location.href='/boardWrite'" type="button">글작성</button>

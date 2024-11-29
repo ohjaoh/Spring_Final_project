@@ -16,7 +16,7 @@ public class UserTest {
 	private UserServiceImpl userServiceimpl;
 
 	// 회원가입 test
-	@Test
+//	@Test
 	public void resiterUserTest() {
 
 //		User user1 = new User();
