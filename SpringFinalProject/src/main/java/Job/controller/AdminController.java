@@ -218,4 +218,22 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 
+	// 게시판삭제
+	@GetMapping("/admin/deleteUser/{userId}")
+	public String adminDeleteUser(@PathVariable("userId") String userId, HttpSession session, Model model) {
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("LoginInfo");
+
+		System.out.println("진입체크" + userId);
+		userService.userDelete(userId);
+
+		// 회원명단 조회
+		List<UserLiteInfo> userList = userService.userList();
+		System.out.println("회원수: " + userList);
+
+		// 모델에 데이터 추가
+		model.addAttribute("UserList", userList);
+
+		return "fragments/admin/AdminUser :: AdminUser"; // 정확한 경로와 프래그먼트 이름
+
+	}
 }

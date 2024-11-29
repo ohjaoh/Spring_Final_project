@@ -16,26 +16,26 @@ public class UserTest {
 	private UserServiceImpl userServiceimpl;
 
 	// 회원가입 test
-//	@Test
+	@Test
 	public void resiterUserTest() {
 
-		User user1 = new User();
-		user1.setUserId("testUser");
-		user1.setUserAge(22);
-		user1.setUserName("거북이");
-		user1.setUserEmail("test@test.com");
-		user1.setUserPassword("testUser");
-		userServiceimpl.registerUser(user1);
+//		User user1 = new User();
+//		user1.setUserId("testUser");
+//		user1.setUserAge(22);
+//		user1.setUserName("거북이");
+//		user1.setUserEmail("test@test.com");
+//		user1.setUserPassword("testUser");
+//		userServiceimpl.registerUser(user1);
 
-//		for (int i = 1; i < 5; i++) {
-//			User user1 = new User();
-//			user1.setUserId("testUser"+ i);
-//			user1.setUserAge(22 + i);
-//			user1.setUserName("거북이" + i);
-//			user1.setUserEmail("test@test.com" + i);
-//			user1.setUserPassword("testUser" + i);
-//			userServiceimpl.registerUser(user1);
-//		}
+		for (int i = 1; i < 5; i++) {
+			User user1 = new User();
+			user1.setUserId("testUser"+ i);
+			user1.setUserAge(22 + i);
+			user1.setUserName("거북이" + i);
+			user1.setUserEmail("test@test.com" + i);
+			user1.setUserPassword("testUser" + i);
+			userServiceimpl.registerUser(user1);
+		}
 	}
 
 	// 회원목록

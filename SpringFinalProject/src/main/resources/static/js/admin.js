@@ -219,4 +219,30 @@ function deleteCategory(boardCategory) {
 			});
 		});
 
+}	
+// 회원 삭제
+function deleteUser(event) {
+
+	// userNo 속성 값 가져오기
+	const userId = event.currentTarget.getAttribute('userId');
+
+	fetch(`/admin/deleteUser/${userId}`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.text();
+		})
+		.then(html => {
+			document.getElementById('content-area').innerHTML = html; // content-area 업데이트
+		})
+		.catch(error => {
+			console.error('Error loading :', error);
+			Swal.fire({
+				icon: 'error',
+				title: '오류',
+				text: '게시판을 불러오는 중 문제가 발생했습니다.'
+			});
+		});
+
 }

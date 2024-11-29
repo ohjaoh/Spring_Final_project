@@ -30,7 +30,8 @@
 				</td>
 
 				<td th:if="${user.userState != 'Deleted'}">
-					<button type="button" class="btn btn-danger btn-sm">삭제</button>
+					<button type="button" th:attr="userId=${user.userId}" class="btn btn-danger btn-sm"
+						onclick="deleteUser(event)">삭제</button>
 				</td>
 			</tr>
 		</tbody>
