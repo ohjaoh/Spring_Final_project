@@ -15,7 +15,7 @@
 					<th scope="col" style="width: 15%;">작성일</th>
 				</tr>
 			</thead>
-			<tbody class="">
+			<tbody class="boardList-item">
 				<tr th:each="board, iterStat : ${boardList}" th:attr="boardNo=${board.boardNo}"
 					onclick="clickBoardItem(event)" class="table-row">
 					<td th:text="${iterStat.index+1}"></td>

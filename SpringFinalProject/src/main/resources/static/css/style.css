@@ -67,7 +67,6 @@
 
         .boardList-item {
         	cursor: pointer;
-        	transition: color 0.3s;
         }
 		
 		.register{
