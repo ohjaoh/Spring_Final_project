@@ -1,6 +1,6 @@
-<div th:fragment="boardUpdate" class="content container mt-5">
-	<div class="card shadow-sm">
-		<div class="card-header bg-primary text-white">
+<div th:fragment="boardUpdate" class="content mt-5">
+	<div class="card shadow">
+		<div class="card-header border_title">
 			<h1>
 				<input type="text" th:value="${board.boardTitle}" class="form-control" id="boardTitle"
 					placeholder="제목을 입력하세요">
@@ -27,7 +27,8 @@
 			</div>
 		</div>
 		<div class="card-footer text-center mt-3">
-			<button class="btn btn-primary btn-lg px-5" th:attr="boardNo=${board.boardNo}" onclick="updateBoard(event)">저장</button>
+			<button class="btn btn-primary btn-lg px-5" th:attr="boardNo=${board.boardNo}"
+				onclick="updateBoard(event)">저장</button>
 		</div>
 	</div>
 </div>
