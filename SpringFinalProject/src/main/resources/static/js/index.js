@@ -299,8 +299,12 @@ function deleteBoard() {
 }
 
 //페이지게이션
-function loadBoardList(categoryName, page) {
-	const url = `/admin/adminBoard/${categoryName}?page=${page}&size=10`;
+function loadBoardList( page) {
+
+	const categoryName = document.getElementById("categoryName").value;
+	
+	console.log(categoryName)
+	const url = `/board/category/${categoryName}?page=${page}&size=10`;
 	fetch(url)
 		.then(response => {
 			if (!response.ok) {

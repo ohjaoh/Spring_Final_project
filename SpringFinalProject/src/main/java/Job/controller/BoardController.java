@@ -50,11 +50,12 @@ public class BoardController {
 		Page<Board> filteredBoards = boardService.boardList(category, pageable);
 
 		// 모델에 데이터 추가
-		model.addAttribute("boardList", filteredBoards.getContent());
 		model.addAttribute("currentPage", filteredBoards.getNumber());
 		model.addAttribute("totalPages", filteredBoards.getTotalPages());
 		model.addAttribute("totalItems", filteredBoards.getTotalElements());
+
 		model.addAttribute("boardList", filteredBoards);
+		model.addAttribute("categoryName", categoryName);
 		return "fragments/BoardList :: BoardList";
 
 	}
@@ -162,7 +163,7 @@ public class BoardController {
 		// 카테고리객체에 맞게 이름을 기준으로 찾아서 가져온다.
 		BoardCategory boardCategory = boardCategoryService.findBoardCategory(category);
 
-		Board board =boardService.boardPage(boardNo);
+		Board board = boardService.boardPage(boardNo);
 
 		board.setBoardTitle(boardTitle);
 		board.setBoardContent(boardContent);
@@ -199,7 +200,7 @@ public class BoardController {
 			System.err.println("카테고리를 찾을 수 없습니다: " + categoryName);
 			return "error/404"; // 에러 페이지로 반환
 		}
-		
+
 		Pageable pageable = PageRequest.of(page, size); // 페이지네이션 설정
 
 		// 카테고리별 게시글 조회 (페이지네이션)
