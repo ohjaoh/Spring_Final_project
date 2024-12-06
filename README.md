@@ -22,6 +22,7 @@
 ## 주요 화면
 - **index**
 <img src="./img/index.png">
+
 - **adminIndex**
 <img src="./img/adminIndex.png">
 
