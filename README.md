@@ -26,13 +26,13 @@
 <img src="./img/adminIndex.png">
 
 - 자세한 내용은 발표자료에 담았습니다.
-# 프로젝트 발표 자료
+## 프로젝트 발표 자료
 
 아래 링크에서 PPT 파일을 다운로드할 수 있습니다:
 
 [Download PPT](https://github.com/ohjaoh/Spring_Final_project/raw/main/사람구인구직사이트(499).pptx)
 
-## 설치 및 실행 방법
+# 설치 및 실행 방법
 1. **클론 저장소**:
    ```bash
    git clone https://github.com/ohjaoh/Spring_Final_project.git
@@ -42,7 +42,8 @@
     
 3. **application.properties 파일 생성**:
     ```bash
-    프로젝트의 루트 디렉토리의 src/main/resources에 아래 가이드를 참고하여 application.properties 파일을 작성하세요.   
+    프로젝트의 루트 디렉토리의 src/main/resources에 아래 가이드를 참고하여 application.properties 파일을 작성하세요.
+    
 # application.properties 설정 가이드
 
 이 문서는 프로젝트 실행을 위해 필요한 `application.properties` 파일의 설정 방법과 필드에 대한 설명을 제공합니다.
